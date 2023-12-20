@@ -1,0 +1,12 @@
+/* Home.css */
+
+.home-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.home-heading {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
