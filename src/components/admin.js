@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Link} from 'react-router-dom'
 import './Admin.css'; // Import CSS file
 
 const Admin = () => {
@@ -24,6 +25,11 @@ const Admin = () => {
 
   return (
     <div className="admin-container">
+      <li>
+            <Link to="/categories" className="navbar-link">
+              Add Categorie
+            </Link>
+          </li>
       <h2>Admin Panel</h2>
       <table className="user-table">
         <thead>

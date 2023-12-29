@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,7 @@ const Login = () => {
     e.preventDefault();
     try {
 
-      if(email == "Admin" && password == "Admin"){
+      if(email === "Admin" && password === "Admin"){
 
         navigate("../admin")
       }
@@ -31,10 +31,10 @@ const Login = () => {
       });
 
       const data = await response.json();
-      localStorage.setItem('token', data.token);
+      localStorage.setItem('LoginToken', data.token);
       console.log("data from login------------------")
       console.log(data)
-      // history.push('/dashboard');
+      // history.push('/home');
     } catch (err) {
       // Handle authentication error (e.g., show error message)
       console.error('Authentication failed:', err.message);

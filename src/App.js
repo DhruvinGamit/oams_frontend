@@ -7,6 +7,7 @@ import Admin from './components/admin';
 import './App.css';
 import ServiceDetails from './components/serviceDetails';
 import AddServices from './components/AddServices';
+import AddCategories from './components/AddCategories';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/categories" element={<AddCategories />} />
             <Route path="/addServices" element={<AddServices />} />
             <Route path="/services/:id" element={<ServiceDetails />} />
           </Routes>

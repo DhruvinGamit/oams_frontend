@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ServiceDetails.css';
@@ -32,9 +31,24 @@ const ServiceDetails = () => {
   return (
     <div className="service-details-container">
       <h2>{service.title}</h2>
+      <img
+        src={service.image}
+        alt={service.title}
+        className="service-details-image"
+      />
       <p>Description: {service.description}</p>
       <p>Charges: {service.charges}</p>
-      {/* Add more service details as needed */}
+      <p>Duration: {service.duration}</p>
+      {service.address && (
+        <div className="address-details">
+          <h3>Address</h3>
+          <p>Street: {service.address.street}</p>
+          <p>City: {service.address.city}</p>
+          <p>State: {service.address.state}</p>
+          <p>Country: {service.address.country}</p>
+          <p>ZIP Code: {service.address.zip}</p>
+        </div>
+      )}
     </div>
   );
 };

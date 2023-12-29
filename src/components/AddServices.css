@@ -1,51 +1,50 @@
 /* Style for Add Services container */
 .add-services-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Style for form elements */
-  .add-services-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .add-services-form input,
-  .add-services-form button {
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .add-services-form label {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 16px;
-  }
-  
-  .add-services-form button {
-    background-color: #3498db;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .add-services-form button:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Style for checkbox */
-  .add-services-form input[type='checkbox'] {
-    cursor: pointer;
-  }
-  
-  /* Optional: Center align the button */
-  .add-services-form button {
-    align-self: flex-start;
-    max-width: 100px; /* Adjust the width as needed */
-  }
-  
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Style for form elements */
+.add-services-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add-services-form input,
+.add-services-form button {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.add-services-form label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 16px;
+}
+
+.add-services-form button {
+  background-color: #3498db;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-services-form button:hover {
+  background-color: #2980b9;
+}
+
+/* Style for checkbox */
+.add-services-form input[type='checkbox'] {
+  cursor: pointer;
+}
+
+/* Optional: Center align the button */
+.add-services-form button {
+  align-self: flex-start;
+  max-width: 100px; /* Adjust the width as needed */
+}

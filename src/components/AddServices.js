@@ -1,106 +1,3 @@
-// import React, { useState } from 'react';
-// import './AddServices.css';
-
-
-// const AddServices = () => {
-//   const [serviceData, setServiceData] = useState({
-//     userId: "65846a9c87b5a8348462baf5", 
-//     title: '',
-//     description: '',
-//     charges: 0,
-//     duration: 0,
-//     availability: false,
-//   });
-
-//   const { title, description, charges, duration, availability } = serviceData;
-
-//   const onChange = (e) => {
-//     setServiceData({ ...serviceData, [e.target.name]: e.target.value });
-//   };
-
-//   const onSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const response = await fetch('http://localhost:8080/api/users/addServices', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(serviceData),
-//       });
-
-//       console.log("response from addService----------------------")
-//       console.log(response)
-
-//       if (response.ok) {
-//         console.log('Service added successfully');
-//         setServiceData({
-//           userId: '',
-//           title: '',
-//           description: '',
-//           charges: 0,
-//           duration: 0,
-//           availability: false,
-//         });
-//       } else {
-//         console.error('Failed to add service:', response.statusText);
-//       }
-//     } catch (error) {
-//       console.error('Failed to add service:', error);
-//     }
-//   };
-
-//   return (
-//     <div className="add-services-container">
-//       <h2>Add Services</h2>
-//       <form onSubmit={onSubmit} className="add-services-form">
-//         <input
-//           type="text"
-//           placeholder="Title"
-//           name="title"
-//           value={title}
-//           onChange={onChange}
-//         />
-//         <input
-//           type="text"
-//           placeholder="Description"
-//           name="description"
-//           value={description}
-//           onChange={onChange}
-//         />
-//         <input
-//           type="number"
-//           placeholder="Charges"
-//           name="charges"
-//           value={charges}
-//           onChange={onChange}
-//         />
-//         <input
-//           type="number"
-//           placeholder="Duration"
-//           name="duration"
-//           value={duration}
-//           onChange={onChange}
-//         />
-//         <label>
-//           Availability:
-//           <input
-//             type="checkbox"
-//             name="availability"
-//             checked={availability}
-//             onChange={() =>
-//               setServiceData({ ...serviceData, availability: !availability })
-//             }
-//           />
-//         </label>
-//         <button type="submit">Add Service</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default AddServices;
 import React, { useState } from 'react';
 import './AddServices.css';
 
@@ -111,21 +8,31 @@ const AddServices = () => {
     description: '',
     charges: 0,
     duration: 0,
-    image: '', 
+    image: '',
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      country: '',
+      zip: '',
+    },
   });
 
-  const { title, description, charges, duration, image } = serviceData;
+  const { title, description, charges, duration, image, address } = serviceData;
 
   const onChange = (e) => {
-    setServiceData({ ...serviceData, [e.target.name]: e.target.value });
+    if (e.target.name.startsWith('address.')) {
+      const updatedAddress = { ...address, [e.target.name.split('.')[1]]: e.target.value };
+      setServiceData({ ...serviceData, address: updatedAddress });
+    } else {
+      setServiceData({ ...serviceData, [e.target.name]: e.target.value });
+    }
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      console.log(" serviceData from addService------------")
-      console.log(serviceData)
       const response = await fetch('http://localhost:8080/api/users/addServices', {
         method: 'POST',
         headers: {
@@ -143,6 +50,13 @@ const AddServices = () => {
           charges: 0,
           duration: 0,
           image: '',
+          address: {
+            street: '',
+            city: '',
+            state: '',
+            country: '',
+            zip: '',
+          },
         });
       } else {
         console.error('Failed to add service:', response.statusText);
@@ -189,6 +103,41 @@ const AddServices = () => {
           placeholder="Image URL"
           name="image"
           value={image}
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          placeholder="Street"
+          name="address.street"
+          value={address.street}
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          name="address.city"
+          value={address.city}
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          placeholder="State"
+          name="address.state"
+          value={address.state}
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          placeholder="Country"
+          name="address.country"
+          value={address.country}
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          placeholder="ZIP Code"
+          name="address.zip"
+          value={address.zip}
           onChange={onChange}
         />
         <button type="submit">Add Service</button>
