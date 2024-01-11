@@ -50,11 +50,11 @@ const Home = () => {
       <div className="categories-container">
          <h2 className="categories-title"></h2>
          <br/>
-        <div className="services-grid">
+        <div className="category-grid">
         {categories.map((category) => (
           <Link to={`/category/${category._id}`} className="view-button2">
-          <div key={category._id} className="service-item" style={{ backgroundImage : `url(${category.image})`, color : 'black' , width: '257px', height: '80px', backgroundRepeat : 'no-repeat' , }}>
-            <h4 className="service-title">{category.title}</h4>
+          <div key={category._id} className="service-item" style={{ backgroundImage : `url(${category.image})`, color : 'black' , width: '227px', height: '80px', backgroundRepeat : 'no-repeat' , }}>
+            <h4 className="category-title">{category.title}</h4>
           </div>
           </Link>
         ))}
@@ -62,7 +62,7 @@ const Home = () => {
       </div>
       <br/><br/>
       <h2 className="services-title">Services</h2>
-      <br/><br/>
+      <br/> <br/>
       <div className="services-grid">
         {services.map((service) => (
           <div key={service._id} className="service-item">
@@ -72,7 +72,9 @@ const Home = () => {
               className="service-image"
               style={{ width: '200px', height: '150px', objectFit: 'cover' }}
             />
+            <br></br>
             <h4 className="service-title">{service.title}</h4>
+            <br></br>
             <p className="service-description">Description: {service.description}</p>
             <p className="service-charges">Charges: {service.charges}</p>
             <p className="service-duration">Duration: {service.duration}</p>

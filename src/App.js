@@ -16,13 +16,13 @@ function App() {
         <Navbar />
         <main>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/categories" element={<AddCategories />} />
-            <Route path="/addServices" element={<AddServices />} />
-            <Route path="/services/:id" element={<ServiceDetails />} />
+            <Route path="/" element={< Home />} />
+            <Route path="/register" element={< Register />} />
+            <Route path="/login" element={< Login />} />
+            <Route path="/admin" element={< Admin />} />
+            <Route path="/categories" element={< AddCategories />} />
+            <Route path="/addServices" element={< AddServices />} />
+            <Route path="/services/:id" element={< ServiceDetails />} />
           </Routes>
         </main>
       </div>

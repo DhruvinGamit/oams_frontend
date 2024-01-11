@@ -1,8 +1,8 @@
 // Navbar.js
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 const Navbar = () => {
   return (
@@ -12,6 +12,11 @@ const Navbar = () => {
           <Link to="/">Your Logo</Link>
         </div> */}
         <ul className="navbar-links">
+          <li>
+            {/* <Link to="/" className="navbar-link" > */}
+              Appointy
+            {/* </Link> */}
+          </li>
           <li>
             <Link to="/" className="navbar-link">
               Home
