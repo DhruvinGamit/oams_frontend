@@ -65,7 +65,7 @@ const Home = () => {
       <br/> <br/>
       <div className="services-grid">
         {services.map((service) => (
-          <div key={service._id} className="service-item">
+          <div key={service._id} className="service-item" style={{backgroundColor : '#3B3C36' , color : 'white'}}>
             <img
               src={service.image}
               alt="Service"

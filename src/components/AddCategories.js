@@ -1,11 +1,10 @@
 // AddCategories.js
-
 import React, { useState } from 'react';
 
 const AddCategories = () => {
   const [categoryData, setCategoryData] = useState({
     title: '',
-    image: '', // You can use file input to handle image uploads
+    image: '', 
   });
 
   const handleInputChange = (e) => {
@@ -19,13 +18,11 @@ const AddCategories = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // Add authentication token if needed
         },
         body: JSON.stringify(categoryData),
       });
 
       if (response.ok) {
-        // Handle successful addition
         console.log('Category added successfully');
       } else {
         console.error('Failed to add category:', response.statusText);

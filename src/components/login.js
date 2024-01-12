@@ -34,7 +34,7 @@ const Login = () => {
       localStorage.setItem('LoginToken', data.token);
       console.log("data from login------------------")
       console.log(data)
-      // history.push('/home');
+      navigate('/');
     } catch (err) {
       // Handle authentication error (e.g., show error message)
       console.error('Authentication failed:', err.message);

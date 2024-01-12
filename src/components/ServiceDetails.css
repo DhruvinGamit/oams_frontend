@@ -1,5 +1,4 @@
-/* ServiceDetails page styling */
-.service-details-container {
+/* .service-details-container {
   width: 80%;
   margin: 20px auto;
   padding: 20px;
@@ -24,4 +23,82 @@
 
 .service-details-container p {
   margin-bottom: 8px;
+}
+
+.address-details {
+  margin-top: 20px;
+}
+
+.appoint-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.appoint-button:hover {
+  background-color: #0056b3;
+} */
+
+
+/* ServiceDetails page styling */
+/* Updated ServiceDetails.css */
+
+.service-details-container {
+  width: 80%;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #4CAF50; /* New color */
+  border-radius: 8px;
+  background-color: #e6ffee; /* New background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+}
+
+.service-details-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.service-details-content {
+  display: flex;
+  flex-direction: column; /* Updated to column layout */
+  align-items: center; /* Center content horizontally */
+}
+
+.service-details-text {
+  width: 100%; /* Updated to full width */
+  text-align: center; /* Center text */
+  margin-top: 20px; /* Adjust as needed */
+}
+
+/* Address details styling */
+.address-details {
+  margin-top: 20px;
+  text-align: center; /* Center text */
+}
+
+/* Appoint button styling */
+.appoint-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50; /* New color */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.appoint-button:hover {
+  background-color: #45a049; /* New hover color */
 }

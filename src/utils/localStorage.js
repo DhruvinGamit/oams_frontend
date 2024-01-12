@@ -9,7 +9,7 @@ export const getToken = () => {
 };
 
 export const isLogin = () => {
-  return !!getToken();
+  return getToken();
 };
 
 export const logout = () => {
