@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Introduction.css'; 
-import {isLogin} from "../utils/localStorage"
+// import {isLogin} from "../utils/localStorage"
 
 const Introduction = () => {
   return (
@@ -40,7 +40,7 @@ const Introduction = () => {
           <li>Automated Reminders</li>
           <li>Secure User Authentication</li>
           <li>Customizable Booking Options</li>
-          <li>{isLogin}</li>
+          {/* <li>{isLogin}</li> */}
 
         </ul>
 

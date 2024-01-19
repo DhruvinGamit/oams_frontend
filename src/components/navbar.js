@@ -1,23 +1,10 @@
 // Navbar.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Navbar.css";
-import { isLogin } from "../utils/localStorage";
+import { isLogin, logout } from "../utils/localStorage";
 
 const Navbar = () => {
-  const [render, setRender] = useState("");
-
-  const re_render = (e) => {
-    console.log(window.localStorage.getItem("LoginToken"));
-    setRender("");
-    console.log("render" , render);
-  };
-
-  // const LoginToken = () => {
-  //   setRender(window.localStorage.getItem("LoginToken"));
-  //   console.log(render);
-  // };
-
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -45,53 +32,47 @@ const Navbar = () => {
               Home
             </Link>
           </li>
-          {isLogin.length > 0 && (
-            <li>
-              <Link to="/addServices" className="navbar-link">
-                Add sevices
-              </Link>
-            </li>
-          )}
+          {window.localStorage.getItem("UserId") && (
+          <li>
+            <Link to="/addServices" className="navbar-link">
+              Add sevices
+            </Link>
+          </li>
+           )} 
           <li>
             <Link to="/register" className="navbar-link">
               Register
             </Link>
           </li>
-          {isLogin.length === 0 && (
+          { !window.localStorage.getItem("UserId") && (
             <li>
               <Link to="/login" className="navbar-link">
                 Login
               </Link>
             </li>
           )}
+          { window.localStorage.getItem("UserId") && (
           <li>
-              <Link to="/service-appointments" className="navbar-link">
+            <Link to="/service-appointments" className="navbar-link">
               service-appointments
-              </Link>
-            </li>
-            <li>
-              <Link to="/requested-services" className="navbar-link">
-              requested-services
-              </Link>
-            </li>
-          <li></li>
-          <li></li> <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li />
-          <li>
-            <button onClick={re_render}> re-render </button>
+            </Link>
           </li>
+          )}
+          { window.localStorage.getItem("UserId") && (
+          <li>
+            <Link to="/requested-services" className="navbar-link">
+              requested-services
+            </Link>
+          </li>
+          )}
+
+          {window.localStorage.getItem("UserId") != null && (
+            <li className="logout-button" style={{marginLeft : 800}}>
+              <button onClick={logout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

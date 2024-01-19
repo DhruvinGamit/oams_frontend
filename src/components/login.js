@@ -38,6 +38,7 @@ const Login = () => {
         console.log(data)
         navigate('/home');
       }
+      window.location.reload();
 
     } catch (err) {
       console.error('Authentication failed:', err.message);
