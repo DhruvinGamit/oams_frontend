@@ -1,0 +1,49 @@
+/* RequestedServices.css */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .ul_appoint {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .li_appoint {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    position: relative;
+  }
+  
+  .link {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+  }
+  
+  .deleteButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 12px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .deleteButton:hover {
+    background-color: #c82333;
+  }
+  

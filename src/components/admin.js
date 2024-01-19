@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
-import './Admin.css'; // Import CSS file
+import '../styles/Admin.css'; // Import CSS file
 
 const Admin = () => {
   const [users, setUsers] = useState([]);

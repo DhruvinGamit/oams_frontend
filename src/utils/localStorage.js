@@ -1,15 +1,14 @@
-export const token_key = 'OASM_TOKEN';
 
 export const setToken = (token) => {
-  window.localStorage.setItem(token_key, token);
+  window.localStorage.setItem("LoginToken", token);
 };
 
 export const getToken = () => {
-  return window.localStorage.getItem(token_key);
+  return window.localStorage.getItem("LoginToken");
 };
 
 export const isLogin = () => {
-  return getToken();
+  return window.localStorage.getItem("LoginToken");
 };
 
 export const logout = () => {

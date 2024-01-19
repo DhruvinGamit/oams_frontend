@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import './AddServices.css';
+import React, { useState, useEffect } from 'react';
+import '../styles/AddServices.css';
 
 const AddServices = () => {
   const [serviceData, setServiceData] = useState({
     userId: "65846a9c87b5a8348462baf5",
     title: '',
     description: '',
-    charges: 0,
-    duration: 0,
+    charges: null,
+    duration: null,
     image: '',
     address: {
       street: '',
@@ -16,9 +16,30 @@ const AddServices = () => {
       country: '',
       zip: '',
     },
+    categoryId: '', 
   });
 
-  const { title, description, charges, duration, image, address } = serviceData;
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const response = await fetch('http://localhost:8080/api/home/categories');
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data.Categories);
+        } else {
+          console.error('Failed to fetch services:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Failed to fetch services:', error);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
+  const { title, description, charges, duration, image, address, categoryId } = serviceData;
 
   const onChange = (e) => {
     if (e.target.name.startsWith('address.')) {
@@ -27,6 +48,10 @@ const AddServices = () => {
     } else {
       setServiceData({ ...serviceData, [e.target.name]: e.target.value });
     }
+  };
+
+  const onCategoryChange = (e) => {
+    setServiceData({ ...serviceData, categoryId: e.target.value });
   };
 
   const onSubmit = async (e) => {
@@ -57,6 +82,7 @@ const AddServices = () => {
             country: '',
             zip: '',
           },
+          categoryId: '',
         });
       } else {
         console.error('Failed to add service:', response.statusText);
@@ -105,6 +131,16 @@ const AddServices = () => {
           value={image}
           onChange={onChange}
         />
+        <select
+          name="categoryId"
+          value={categoryId}
+          onChange={onCategoryChange}
+        >
+          <option value="" disabled>Select Category</option>
+          {categories.map(category => (
+            <option key={category._id} value={category._id}>{category.title}</option>
+          ))}
+        </select>
         <input
           type="text"
           placeholder="Street"

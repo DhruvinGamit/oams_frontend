@@ -19,7 +19,7 @@ const Login = () => {
 
       if(email === "Admin" && password === "Admin"){
 
-        navigate("../admin")
+        navigate("/admin")
       }
 
       const response = await fetch('http://localhost:8080/api/users/login', {
@@ -31,12 +31,15 @@ const Login = () => {
       });
 
       const data = await response.json();
-      localStorage.setItem('LoginToken', data.token);
-      console.log("data from login------------------")
-      console.log(data)
-      navigate('/');
+      if(data.token != null){
+        localStorage.setItem('LoginToken', data.token);
+        localStorage.setItem('UserId', data.userId);
+        console.log("data from login------------------")
+        console.log(data)
+        navigate('/home');
+      }
+
     } catch (err) {
-      // Handle authentication error (e.g., show error message)
       console.error('Authentication failed:', err.message);
     }
   };
