@@ -40,9 +40,11 @@ const Navbar = () => {
           </li>
            )} 
           <li>
+          { !window.localStorage.getItem("UserId") && (
             <Link to="/register" className="navbar-link">
               Register
             </Link>
+            )}
           </li>
           { !window.localStorage.getItem("UserId") && (
             <li>

@@ -81,8 +81,8 @@ const AppointmentForm = () => {
 
       if (response.ok) {
         console.log('Appointment submitted successfully!');
-        // You can redirect or perform other actions after submission
-        navigate('/home'); // Redirect to the home page after submission
+        
+        navigate('/home'); 
       } else {
         console.error('Failed to submit appointment:', response.statusText);
       }

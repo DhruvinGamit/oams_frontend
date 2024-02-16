@@ -9,8 +9,9 @@ const RequestedServices = () => {
   const [error, setError] = useState(null);
 
   const userId = window.localStorage.getItem("UserId");
-
+  
   useEffect(() => {
+    console.log(userId)
     const fetchAppointments = async () => {
       try {
         const response = await fetch(
@@ -22,9 +23,10 @@ const RequestedServices = () => {
             },
           }
         );
-
+        console.log(userId)
         if (response.ok) {
           const data = await response.json();
+          console.log(data)
           setAppointments(data.appointments);
         } else {
           const errorMessage = await response.text();

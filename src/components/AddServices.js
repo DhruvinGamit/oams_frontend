@@ -69,7 +69,7 @@ const AddServices = () => {
       if (response.ok) {
         console.log('Service added successfully');
         setServiceData({
-          userId: "65846a9c87b5a8348462baf5",
+          userId: window.localStorage.getItem("UserId"),
           title: '',
           description: '',
           charges: 0,

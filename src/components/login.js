@@ -14,9 +14,8 @@ const Login = () => {
   };
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    
     try {
-
       if(email === "Admin" && password === "Admin"){
 
         navigate("/admin")

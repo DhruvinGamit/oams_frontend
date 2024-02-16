@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 
 const ServiceAppointments = () => {
   const [appointments, setAppointments] = useState([]);
+  const userId = window.localStorage.getItem("UserId");
 
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
         // Fetch appointments for the service owner
-        const response = await fetch('http://localhost:8080/api/appointments/service', {
+        const response = await fetch('http://localhost:8080/api/appointments/appointments?userId=${userId}', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${window.localStorage.getItem('LoginToken')}`,
@@ -18,6 +19,8 @@ const ServiceAppointments = () => {
 
         if (response.ok) {
           const data = await response.json();
+          console.log("data----")
+          console.log(data)
           setAppointments(data.appointments);
         } else {
           console.error('Failed to fetch appointments:', response.statusText);
