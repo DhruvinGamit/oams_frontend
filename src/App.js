@@ -8,6 +8,8 @@ import './App.css';
 import ServiceDetails from './components/serviceDetails';
 import AddServices from './components/AddServices';
 import AddCategories from './components/AddCategories';
+import CatagoryServices from './components/CatagoryServices';
+
 import Introduction from './components/introduction';
 import AppointmentForm from './components/AppointmentForm';
 import RequestedServices from './components/RequestedServices';
@@ -27,6 +29,8 @@ function App() {
             <Route path="/login" element={< Login />} />
             <Route path="/admin" element={< Admin />} />
             <Route path="/categories" element={< AddCategories />} />
+            <Route path="/category/:categoryId/services" element={< CatagoryServices />} />
+
             <Route path="/addServices" element={< AddServices />} />
             <Route path="/services/:id" element={< ServiceDetails />} />
             <Route path="/appoint/:id" element={<AppointmentForm />} />
