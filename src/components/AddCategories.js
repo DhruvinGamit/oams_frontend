@@ -14,7 +14,7 @@ const AddCategories = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/api/categories/add', {
+      const response = await fetch('http://localhost:8080/api/category/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

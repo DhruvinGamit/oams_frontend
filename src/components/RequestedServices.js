@@ -11,11 +11,12 @@ const RequestedServices = () => {
   const userId = window.localStorage.getItem("UserId");
   
   useEffect(() => {
-    console.log(userId)
+    
     const fetchAppointments = async () => {
       try {
+        console.log( "from upperpart : " ,  userId)
         const response = await fetch(
-          `http://localhost:8080/api/appointments/user?userId=${userId}`,
+          `http://localhost:8080/api/appointments/RequestedServices?userId=${userId}`,
           {
             method: "GET",
             headers: {
@@ -96,7 +97,7 @@ const RequestedServices = () => {
                         className="deleteButton"
                         onClick={() => handleDeleteAppointment(appointment._id)}
                       >
-                        Delete
+                        Cancel
                       </button>
                     </li>
                   ))}

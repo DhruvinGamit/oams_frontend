@@ -92,6 +92,8 @@
 // export default Home;
 
 
+
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Home.css';
@@ -106,12 +108,12 @@ const Home = () => {
         const response = await fetch('http://localhost:8080/api/home/categories');
         if (response.ok) {
           const data = await response.json();
-          setCategories(data.Categories);
+          setCategories(data.categories); // Update to use "categories" key
         } else {
-          console.error('Failed to fetch services:', response.statusText);
+          console.error('Failed to fetch categories:', response.statusText);
         }
       } catch (error) {
-        console.error('Failed to fetch services:', error);
+        console.error('Failed to fetch categories:', error);
       }
     };
 
@@ -145,39 +147,58 @@ const Home = () => {
         <h2 className="categories-title"></h2>
         <br />
         <div className="category-grid">
-          {categories.map((category) => (
-            <Link key={category._id} to={`/category/${category._id}`} className="view-button2">
-              <div className="service-item" style={{ backgroundImage: `url(${category.image})`, color: 'black', width: '227px', height: '80px', backgroundRepeat: 'no-repeat' }}>
-                <h4 className="category-title">{category.title}</h4>
-              </div>
-            </Link>
-          ))}
+          {categories && categories.length > 0 ? (
+            categories.map((category) => (
+              <Link key={category._id} to={`/category/${category._id}`} className="view-button2">
+                <div
+                  key={category._id}
+                  className="service-item"
+                  style={{
+                    backgroundImage: `url(${category.image})`,
+                    color: 'black',
+                    width: '227px',
+                    height: '80px',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                >
+                  <h4 className="category-title">{category.title}</h4>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p>No categories available.</p>
+          )}
         </div>
       </div>
-      <br /><br />
+      <br />
+      <br />
       <h2 className="services-title">Services</h2>
       <br /> <br />
       <div className="services-grid">
-        {services.map((service) => (
-          <div key={service._id} className="service-item" style={{ backgroundColor: '#3B3C36', color: 'white' }}>
-            <img
-              src={service.image}
-              alt="Service"
-              className="service-image"
-              style={{ width: '200px', height: '150px', objectFit: 'cover' }}
-            />
-            <br></br>
-            <h4 className="service-title">{service.title}</h4>
-            <br></br>
-            <p className="service-description">Description: {service.description}</p>
-            <p className="service-charges">Charges: {service.charges}</p>
-            <p className="service-duration">Duration: {service.duration}</p>
+        {services && services.length > 0 ? (
+          services.map((service) => (
+            <div key={service._id} className="service-item" style={{ backgroundColor: '#3B3C36', color: 'white' }}>
+              <img
+                src={service.image}
+                alt="Service"
+                className="service-image"
+                style={{ width: '200px', height: '150px', objectFit: 'cover' }}
+              />
+              <br></br>
+              <h4 className="service-title">{service.title}</h4>
+              <br></br>
+              <p className="service-description">Description: {service.description}</p>
+              <p className="service-charges">Charges: {service.charges}</p>
+              <p className="service-duration">Duration: {service.duration}</p>
 
-            <Link to={`/services/${service._id}`} className="view-button">
-              View Details
-            </Link>
-          </div>
-        ))}
+              <Link to={`/services/${service._id}`} className="view-button">
+                View Details
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p>No services available.</p>
+        )}
       </div>
     </div>
   );

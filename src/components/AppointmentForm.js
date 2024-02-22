@@ -1,16 +1,52 @@
-// // AppointmentForm.js
 // import React, { useState } from 'react';
 // import { useParams } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 // const AppointmentForm = () => {
 //   const [date, setDate] = useState('');
 //   const [time, setTime] = useState('');
 //   const { id } = useParams();
+//   const navigate = useNavigate();
 
-//   const handleAppointmentSubmit = () => {
-//     // Handle appointment submission logic here
-//     console.log('Appointment submitted:', { date, time, serviceId: id });
-//     // You can redirect or perform other actions after submission
+//   const handleAppointmentSubmit = async (e) => {
+//     e.preventDefault();
+
+//     const selectedDateTime = new Date(`${date}T${time}`);
+//     const currentDateTime = new Date();
+
+//     if (selectedDateTime <= currentDateTime) {
+//       alert('Please select a future date and time for the appointment.');
+//       return;
+//     }
+
+    
+
+//     try {
+//       const response = await fetch('http://localhost:8080/api/appointments', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({
+//           userId: window.localStorage.getItem("UserId"),
+//           serviceId: id,
+//           date: selectedDateTime.toISOString(),
+//           time: time,
+//         }),
+//       });
+
+//       console.log(window.localStorage.getItem("UserId"));
+
+//       if (response.ok) {
+//         console.log('Appointment submitted successfully!');
+        
+//         navigate('/home'); 
+//       } else {
+//         console.error('Failed to submit appointment:', response.statusText);
+//       }
+//     } catch (error) {
+//       console.error('Error submitting appointment:', error);
+//     }
 //   };
 
 //   return (
@@ -42,15 +78,16 @@
 // };
 
 // export default AppointmentForm;
+
+
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import Razorpay from 'razorpay';
 
 const AppointmentForm = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const handleAppointmentSubmit = async (e) => {
     e.preventDefault();
@@ -64,6 +101,45 @@ const AppointmentForm = () => {
     }
 
     try {
+      // Fetch Razorpay order
+      const orderResponse = await fetch('http://localhost:8080/api/payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: 50000, // Set your appointment amount in paisa
+        }),
+      });
+
+      const order = await orderResponse.json();
+
+      // Initialize Razorpay
+      const rzp = new Razorpay({
+        key: 'YOUR_RAZORPAY_KEY_ID',
+        amount: order.amount,
+        currency: order.currency,
+        order_id: order.id,
+        name: 'Your Appointment Booking',
+        description: 'Appointment Booking Payment',
+        handler: function (response) {
+          if (response.razorpay_payment_id) {
+            submitAppointment(response.razorpay_payment_id);
+          } else {
+            alert('Payment failed!');
+          }
+        },
+      });
+
+      // Open Razorpay checkout form
+      rzp.open();
+    } catch (error) {
+      console.error('Error submitting appointment:', error);
+    }
+  };
+
+  const submitAppointment = async (paymentId) => {
+    try {
       const response = await fetch('http://localhost:8080/api/appointments', {
         method: 'POST',
         headers: {
@@ -72,17 +148,15 @@ const AppointmentForm = () => {
         body: JSON.stringify({
           userId: window.localStorage.getItem("UserId"),
           serviceId: id,
-          date: selectedDateTime.toISOString(),
+          date: new Date(`${date}T${time}`).toISOString(),
           time: time,
+          paymentId: paymentId,
         }),
       });
 
-      console.log(window.localStorage.getItem("UserId"));
-
       if (response.ok) {
         console.log('Appointment submitted successfully!');
-        
-        navigate('/home'); 
+        // Navigate to the desired page (replace with your routing logic)
       } else {
         console.error('Failed to submit appointment:', response.statusText);
       }

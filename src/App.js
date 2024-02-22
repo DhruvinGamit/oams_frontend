@@ -29,8 +29,7 @@ function App() {
             <Route path="/login" element={< Login />} />
             <Route path="/admin" element={< Admin />} />
             <Route path="/categories" element={< AddCategories />} />
-            <Route path="/category/:categoryId/services" element={< CatagoryServices />} />
-
+            <Route path="/category/:categoryId" element={< CatagoryServices />} />
             <Route path="/addServices" element={< AddServices />} />
             <Route path="/services/:id" element={< ServiceDetails />} />
             <Route path="/appoint/:id" element={<AppointmentForm />} />
