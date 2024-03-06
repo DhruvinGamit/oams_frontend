@@ -19,8 +19,6 @@
 //       return;
 //     }
 
-    
-
 //     try {
 //       const response = await fetch('http://localhost:8080/api/appointments', {
 //         method: 'POST',
@@ -39,8 +37,8 @@
 
 //       if (response.ok) {
 //         console.log('Appointment submitted successfully!');
-        
-//         navigate('/home'); 
+
+//         navigate('/home');
 //       } else {
 //         console.error('Failed to submit appointment:', response.statusText);
 //       }
@@ -79,96 +77,345 @@
 
 // export default AppointmentForm;
 
+//--------------------------------------------------------------------------------------------------------------------
 
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Razorpay from 'razorpay';
+
+
+// import React, { useState } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+
+// const AppointmentForm = () => {
+//   const [date, setDate] = useState("");
+//   const [time, setTime] = useState("");
+//   const [agreedToTerms, setAgreedToTerms] = useState(false);
+//   const { id } = useParams();
+//   const navigate = useNavigate();
+
+//   const initPayment = async (data, AppointmentData, successCallback) => {
+
+//     console.log("AppointmentData : " , AppointmentData)
+
+//     const amount_to_pay = AppointmentData.book_cost * 100;
+
+//     const options = {
+//       key: process.env.REACT_APP_API_KEY,
+//       amount: amount_to_pay,
+//       currency: data.currency,
+//       name: `Appointy`,
+//       description: "Testing",
+//       image: AppointmentData.packImage,
+//       order_id: data.id,
+//       handler: async (response) => {
+//         try {
+//           const newResponse = {
+//             response,
+//             AppointmentData,
+//           };
+
+//           const apiResponse = await fetch(
+//             "http://localhost:8080/api/payment/verify",
+//             {
+//               method: "POST",
+//               headers: {
+//                 "Content-Type": "application/json",
+//               },
+//               body: JSON.stringify(newResponse),
+//             }
+//           );
+
+//           const responseData = await apiResponse.json();
+//           console.log(responseData.message);
+
+//           if (apiResponse.status === 200) {
+//             successCallback();
+//             window.alert("Your Bookings Are Confirmed");
+//             navigate("/Home");
+//           } else {
+//             throw new Error("Booking Failed");
+//           }
+//         } catch (error) {
+//           console.error("Error in handler function:", error);
+//         }
+//       },
+//     };
+
+//     const rzp1 = new window.Razorpay(options);
+//     rzp1.open();
+//   };
+
+//   const handlePayment = async (e) => {
+//     e.preventDefault();
+
+//     if (!agreedToTerms) {
+//       alert("Please agree to the terms before booking.");
+//       return;
+//     }
+
+//     try {
+//       console.log("inside handlePayment---------------")
+
+//       console.log("id : " , id)
+//       console.log("time : " , time)
+//       console.log("date : " , date)
+
+//       const response = await fetch("http://localhost:8080/api/payment", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           userId: window.localStorage.getItem("UserId"),
+//           serviceId: id,
+//           date: date,
+//           time: time,
+//         }),
+//       });
+
+//       if (response.status === 200) {
+//         const resData = await response.json();
+
+//         console.log("resData in handelpayment : " , resData)
+
+//         const successCallback = () => {
+//           handleAppointmentSubmit(resData.data, resData.saveAppointment);
+//         };
+//         initPayment(resData.data, resData.saveAppointment, successCallback);
+//       } else {
+//         console.error("Error creating order:", response.statusText);
+//         // Handle error appropriately (e.g., show an error message to the user)
+//       }
+//     } catch (error) {
+//       console.error("Error sending order data:", error);
+//       // Handle error appropriately (e.g., show an error message to the user)
+//     }
+//   };
+
+//   const handleAppointmentSubmit = async (orderData, AppointmentData) => {
+//     const selectedDateTime = new Date(`${date}T${time}`);
+//     const currentDateTime = new Date();
+
+//     if (selectedDateTime <= currentDateTime) {
+//       alert("Please select a future date and time for the appointment.");
+//       return;
+//     }
+
+//     try {
+//       const response = await fetch("http://localhost:8080/api/appointments", {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify({
+//           userId: window.localStorage.getItem("UserId"),
+//           serviceId: id,
+//           date: selectedDateTime.toISOString(),
+//           time: time,
+//           paymentId: orderData.id, // Assuming 'id' is the payment ID
+//         }),
+//       });
+
+//       if (response.ok) {
+//         console.log("Appointment submitted successfully!");
+//         navigate("/home");
+//       } else {
+//         console.error("Failed to submit appointment:", response.statusText);
+//       }
+//     } catch (error) {
+//       console.error("Error submitting appointment:", error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2>Book Appointment</h2>
+//       <form onSubmit={handlePayment}>
+//         <label htmlFor="date">Date:</label>
+//         <input
+//           type="date"
+//           id="date"
+//           value={date}
+//           onChange={(e) => setDate(e.target.value)}
+//           required
+//         />
+//         <br />
+//         <label htmlFor="time">Time:</label>
+//         <input
+//           type="time"
+//           id="time"
+//           value={time}
+//           onChange={(e) => setTime(e.target.value)}
+//           required
+//         />
+//         <br />
+//         <label>
+//           <input
+//             type="checkbox"
+//             checked={agreedToTerms}
+//             onChange={() => setAgreedToTerms(!agreedToTerms)}
+//           />
+//           I agree to the terms
+//         </label>
+//         <br />
+//         <button type="submit">Proceed to Payment</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default AppointmentForm;
+
+
+//--------------------------------------------------------------------------------------------------------------------
+
+
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
 const AppointmentForm = () => {
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const handleAppointmentSubmit = async (e) => {
+  const loadRazorpayScript = async () => {
+    // Fetch Razorpay script
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = resolve;
+      document.head.appendChild(script);
+    });
+  };
+
+  const initPayment = async (data, AppointmentData, successCallback) => {
+
+
+    console.log("initPayment--------------------------------------------")
+    await loadRazorpayScript();
+    console.log("after loadRazorpayScript-------------")
+    const amount_to_pay = AppointmentData.book_cost * 100;
+
+    const options = {
+      key: process.env.REACT_APP_API_KEY,
+      amount: amount_to_pay,
+      currency: data.currency,
+      name: `Package: ${AppointmentData.packageName}`,
+      description: "Testing",
+      image: AppointmentData.packImage,
+      order_id: data.id,
+      handler: async (response) => {
+        try {
+          const newResponse = {
+            response,
+            AppointmentData,
+          };
+          console.log("newResponse in going verify------------")
+          const apiResponse = await fetch("http://localhost:8080/api/payment/verify", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newResponse),
+          });
+
+          const responseData = await apiResponse.json();
+          console.log(responseData.message);
+
+          if (apiResponse.status === 200) {
+            successCallback();
+            window.alert("Your Bookings Are Confirmed");
+            navigate("/Home");
+          } else {
+            throw new Error("Booking Failed");
+          }
+        } catch (error) {
+          console.error("Error in handler function:", error);
+        }
+      },
+    };
+
+    const rzp1 = new window.Razorpay(options);
+    rzp1.open();
+  };
+
+  const handlePayment = async (e) => {
     e.preventDefault();
 
-    const selectedDateTime = new Date(`${date}T${time}`);
-    const currentDateTime = new Date();
-
-    if (selectedDateTime <= currentDateTime) {
-      alert('Please select a future date and time for the appointment.');
+    if (!agreedToTerms) {
+      alert("Please agree to the terms before booking.");
       return;
     }
 
     try {
-      // Fetch Razorpay order
-      const orderResponse = await fetch('http://localhost:8080/api/payment', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/api/payment", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          amount: 50000, // Set your appointment amount in paisa
-        }),
-      });
-
-      const order = await orderResponse.json();
-
-      // Initialize Razorpay
-      const rzp = new Razorpay({
-        key: 'YOUR_RAZORPAY_KEY_ID',
-        amount: order.amount,
-        currency: order.currency,
-        order_id: order.id,
-        name: 'Your Appointment Booking',
-        description: 'Appointment Booking Payment',
-        handler: function (response) {
-          if (response.razorpay_payment_id) {
-            submitAppointment(response.razorpay_payment_id);
-          } else {
-            alert('Payment failed!');
-          }
-        },
-      });
-
-      // Open Razorpay checkout form
-      rzp.open();
-    } catch (error) {
-      console.error('Error submitting appointment:', error);
-    }
-  };
-
-  const submitAppointment = async (paymentId) => {
-    try {
-      const response = await fetch('http://localhost:8080/api/appointments', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: window.localStorage.getItem("UserId"),
           serviceId: id,
-          date: new Date(`${date}T${time}`).toISOString(),
+          date: date,
           time: time,
-          paymentId: paymentId,
+        }),
+      });
+
+      if (response.status === 200) {
+        const resData = await response.json();
+
+        const successCallback = () => {
+          handleAppointmentSubmit(resData.data, resData.saveAppointment);
+        };
+
+        initPayment(resData.data, resData.saveAppointment, successCallback);
+      } else {
+        console.error("Error creating order:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error sending order data:", error);
+    }
+  };
+
+  const handleAppointmentSubmit = async (orderData, AppointmentData) => {
+    const selectedDateTime = new Date(`${date}T${time}`);
+    const currentDateTime = new Date();
+
+    if (selectedDateTime <= currentDateTime) {
+      alert("Please select a future date and time for the appointment.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:8080/api/appointments", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: window.localStorage.getItem("UserId"),
+          serviceId: id,
+          date: selectedDateTime.toISOString(),
+          time: time,
+          paymentId: orderData.id, // Assuming 'id' is the payment ID
         }),
       });
 
       if (response.ok) {
-        console.log('Appointment submitted successfully!');
-        // Navigate to the desired page (replace with your routing logic)
+        console.log("Appointment submitted successfully!");
+        navigate("/home");
       } else {
-        console.error('Failed to submit appointment:', response.statusText);
+        console.error("Failed to submit appointment:", response.statusText);
       }
     } catch (error) {
-      console.error('Error submitting appointment:', error);
+      console.error("Error submitting appointment:", error);
     }
   };
 
   return (
     <div>
       <h2>Book Appointment</h2>
-      <form onSubmit={handleAppointmentSubmit}>
+      <form onSubmit={handlePayment}>
         <label htmlFor="date">Date:</label>
         <input
           type="date"
@@ -187,7 +434,16 @@ const AppointmentForm = () => {
           required
         />
         <br />
-        <button type="submit">Submit Appointment</button>
+        <label>
+          <input
+            type="checkbox"
+            checked={agreedToTerms}
+            onChange={() => setAgreedToTerms(!agreedToTerms)}
+          />
+          I agree to the terms
+        </label>
+        <br />
+        <button type="submit">Proceed to Payment</button>
       </form>
     </div>
   );

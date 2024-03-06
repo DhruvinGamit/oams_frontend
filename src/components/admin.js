@@ -27,7 +27,7 @@ const Admin = () => {
     <div className="admin-container">
       <li>
             <Link to="/categories" className="navbar-link">
-            Add Categorie
+            Add Category
             </Link>
           </li>
       <h2>Admin Panel</h2>
