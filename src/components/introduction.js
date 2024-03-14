@@ -53,7 +53,10 @@ const Introduction = () => {
         <p>
           Ready to experience the convenience of our Appointment Management System? Click the button below to get started.
         </p>
-        <Link to="/login" className="cta-button">Schedule an Appointment</Link>
+        {
+          window.localStorage.getItem("UserId") ? (<Link to="/Home" className="cta-button">Schedule an Appointment</Link>) : <Link to="/login" className="cta-button">Schedule an Appointment</Link>  
+        }
+        
       </section>
     </div>
   );
