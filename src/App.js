@@ -14,6 +14,8 @@ import Introduction from './components/introduction';
 import AppointmentForm from './components/AppointmentForm';
 import RequestedServices from './components/RequestedServices';
 import ServiceAppointments from './components/ServiceAppointments';
+import ServiceUpdate from './components/ServiceUpdate';
+
 
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
             <Route path="/appoint/:id" element={<AppointmentForm />} />
             <Route path="/requested-services" element={<RequestedServices />} />
             <Route path="/service-appointments" element={<ServiceAppointments />} />
+            <Route path="/services/edit/:id" element={<ServiceUpdate />} />
+
           </Routes>
         </main>
       </div>

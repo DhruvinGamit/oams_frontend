@@ -1,8 +1,166 @@
 
+// import React, { useState, useEffect } from "react";
+// import { Link } from "react-router-dom";
+// import "../styles/ServiceAppointments.css";
 
-// ServiceAppointments.js
+// const ServiceAppointments = () => {
+//   const [appointments, setAppointments] = useState([]);
+//   const userId = window.localStorage.getItem("UserId");
+
+//   useEffect(() => {
+//     const fetchAppointments = async () => {
+//       try {
+//         const response = await fetch(
+//           `http://localhost:8080/api/appointments/ServiceAppointments?userId=${userId}`,
+//           {
+//             method: "GET",
+//             headers: {
+//               Authorization: `Bearer ${window.localStorage.getItem(
+//                 "LoginToken"
+//               )}`,
+//             },
+//           }
+//         );
+
+//         if (response.ok) {
+//           const data = await response.json();
+//           setAppointments(data.appointments);
+//         } else {
+//           console.error("Failed to fetch appointments:", response.statusText);
+//         }
+//       } catch (error) {
+//         console.error("Error fetching appointments:", error);
+//       }
+//     };
+
+//     fetchAppointments();
+//   }, []);
+
+//   const handleAcceptReject = async (appointmentId, status) => {
+//     try {
+//       const response = await fetch(
+//         `http://localhost:8080/api/appointments/${appointmentId}`,
+//         {
+//           method: "PATCH",
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${window.localStorage.getItem("LoginToken")}`,
+//           },
+//           body: JSON.stringify({ status }),
+//         }
+//       );
+  
+//       if (response.ok) {
+//         // Update the appointment status locally
+//         setAppointments(prevAppointments =>
+//           prevAppointments.map(appointment =>
+//             appointment._id === appointmentId ? { ...appointment, status } : appointment
+//           )
+//         );
+  
+//         // Notify the server about the status change
+//         notifyServer(appointmentId, status);
+  
+//         console.log(`Appointment ${status} successfully`);
+//       } else {
+//         console.error(`Failed to ${status} appointment:`, response.statusText);
+//       }
+//     } catch (error) {
+//       console.error(`Error ${status} appointment:`, error);
+//     }
+//   };
+  
+
+//   const notifyServer = async (appointmentId, status) => {
+//     try {
+//       const response = await fetch(
+//         `http://localhost:8080/api/appointments/notify`,
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${window.localStorage.getItem(
+//               "LoginToken"
+//             )}`,
+//           },
+//           body: JSON.stringify({ appointmentId, status }),
+//         }
+//       );
+
+//       if (response.ok) {
+//         console.log(`Server notified about the status change.`);
+//       } else {
+//         console.error(
+//           "Failed to notify the server about the status change:",
+//           response.statusText
+//         );
+//       }
+//     } catch (error) {
+//       console.error("Error notifying the server:", error);
+//     }
+//   };
+
+//   return (
+//     <div className="container">
+//       <h2>Service Appointments</h2>
+//       {appointments.length === 0 ? (
+//         <p>No appointment requests found for your services.</p>
+//       ) : (
+//         <ul className="appointments-list">
+//           {appointments.map((appointment) => (
+//             <li className="appointment-item" key={appointment._id}>
+//               <div>
+//                 <Link
+//                   to={`/appoint/${appointment._id}`}
+//                   className="service-link"
+//                 >
+//                   Appointment for Service ID: {appointment.serviceId} - Status:{" "}
+//                   {appointment.status}
+//                 </Link>
+//                 <p>
+//                   Date: {new Date(appointment.createdAt).toLocaleDateString()}
+//                 </p>
+//                 <p>
+//                   Time: {new Date(appointment.createdAt).toLocaleTimeString()}
+//                 </p>
+//                 <p>User Email: {appointment.userId.email}</p>
+//               </div>
+//               {appointment.status === "pending" && (
+//                 <div className="action-buttons">
+//                   <button
+//                     className="accept-button"
+//                     onClick={() =>
+//                       handleAcceptReject(appointment._id, "accepted")
+//                     }
+//                   >
+//                     Accept
+//                   </button>
+//                   <button
+//                     className="reject-button"
+//                     onClick={() =>
+//                       handleAcceptReject(appointment._id, "rejected")
+//                     }
+//                   >
+//                     Reject
+//                   </button>
+//                 </div>
+//               )}
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default ServiceAppointments;
+
+
+
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../styles/ServiceAppointments.css";
 
 const ServiceAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -27,10 +185,7 @@ const ServiceAppointments = () => {
           const data = await response.json();
           setAppointments(data.appointments);
         } else {
-          console.error(
-            "Failed to fetch appointments:",
-            response.statusText
-          );
+          console.error("Failed to fetch appointments:", response.statusText);
         }
       } catch (error) {
         console.error("Error fetching appointments:", error);
@@ -53,11 +208,19 @@ const ServiceAppointments = () => {
           body: JSON.stringify({ status }),
         }
       );
-
+  
       if (response.ok) {
-        console.log(`Appointment ${status} successfully`);
-        // Add logic to notify the server about the status change
+        // Update the appointment status locally
+        setAppointments(prevAppointments =>
+          prevAppointments.map(appointment =>
+            appointment._id === appointmentId ? { ...appointment, status } : appointment
+          )
+        );
+  
+        // Notify the server about the status change
         notifyServer(appointmentId, status);
+  
+        console.log(`Appointment ${status} successfully`);
       } else {
         console.error(`Failed to ${status} appointment:`, response.statusText);
       }
@@ -65,6 +228,7 @@ const ServiceAppointments = () => {
       console.error(`Error ${status} appointment:`, error);
     }
   };
+  
 
   const notifyServer = async (appointmentId, status) => {
     try {
@@ -74,7 +238,9 @@ const ServiceAppointments = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${window.localStorage.getItem("LoginToken")}`,
+            Authorization: `Bearer ${window.localStorage.getItem(
+              "LoginToken"
+            )}`,
           },
           body: JSON.stringify({ appointmentId, status }),
         }
@@ -92,30 +258,47 @@ const ServiceAppointments = () => {
       console.error("Error notifying the server:", error);
     }
   };
-  
 
   return (
-    <div>
+    <div className="container">
       <h2>Service Appointments</h2>
       {appointments.length === 0 ? (
         <p>No appointment requests found for your services.</p>
       ) : (
-        <ul>
+        <ul className="appointments-list">
           {appointments.map((appointment) => (
-            <li key={appointment._id}>
-              <Link to={`/appoint/${appointment._id}`}>
-                Appointment for Service ID: {appointment.serviceId} - Status:{" "}
-                {appointment.status}
-              </Link>
+            <li className="appointment-item" key={appointment._id}>
+              <div>
+                <span
+                  to={`/appoint/${appointment._id}`}
+                  className="service-link"
+                >
+                  Appointment for Service ID: {appointment.serviceId} - Status:{" "}
+                  {appointment.status}
+                </span>
+                <p>
+                  Date: {new Date(appointment.createdAt).toLocaleDateString()}
+                </p>
+                <p>
+                  Time: {new Date(appointment.createdAt).toLocaleTimeString()}
+                </p>
+                <p>User Email: {appointment.userId.email}</p>
+              </div>
               {appointment.status === "pending" && (
-                <div>
+                <div className="action-buttons">
                   <button
-                    onClick={() => handleAcceptReject(appointment._id, "accepted")}
+                    className="accept-button"
+                    onClick={() =>
+                      handleAcceptReject(appointment._id, "accepted")
+                    }
                   >
                     Accept
                   </button>
                   <button
-                    onClick={() => handleAcceptReject(appointment._id, "rejected")}
+                    className="reject-button"
+                    onClick={() =>
+                      handleAcceptReject(appointment._id, "rejected")
+                    }
                   >
                     Reject
                   </button>

@@ -1,76 +1,3 @@
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
-// // import '../styles/Category.css';
-
-// const Category = () => {
-//   const { categoryId } = useParams();
-//   const [category, setCategory] = useState({});
-//   const [services, setServices] = useState([]);
-
-//   useEffect(() => {
-//     const fetchCategory = async () => {
-//       try {
-//         const response = await fetch(`http://localhost:8080/api/home/category/${categoryId}`);
-//         if (response.ok) {
-//           const data = await response.json();
-//           console.log('Fetched category data:', data);
-//           setCategory(data.category);
-//           setServices(data.services);  // Check this line to match your actual response structure
-//         } else {
-//           console.error('Failed to fetch category:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Error fetching category:', error);
-//       }
-//     };
-    
-    
-
-//     fetchCategory();
-//   }, [categoryId]);
-
-//   return (
-//     <div className="category-container">
-//       {category && Object.keys(category).length !== 0 ? (
-//         <>
-//           <h2 className="category-title">{category.title}</h2>
-//           <div className="category-description">{category.description}</div>
-//           <br />
-//         </>
-//       ) : (
-//         <p>Loading...</p>
-//       )}
-  
-//       <h2 className="services-title">Services in this Category</h2>
-//       <div className="services-grid">
-//         {services.map((service) => (
-//           <div key={service._id} className="service-item" style={{ backgroundColor: '#3B3C36', color: 'white' }}>
-//             <img
-//                 src={service.image}
-//                 alt="Service"
-//                 className="service-image"
-//                 style={{ width: '200px', height: '150px', objectFit: 'cover' }}
-//               />
-//               <br></br>
-//               <h4 className="service-title">{service.title}</h4>
-//               <br></br>
-//               <p className="service-description">Description: {service.description}</p>
-//               <p className="service-charges">Charges: {service.charges}</p>
-//               <p className="service-duration">Duration: {service.duration}</p>
-//               {/* <Link to={`/category/${categoryId}`}>View Category</Link> */}
-  
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Category;
-
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -100,13 +27,29 @@ const Category = () => {
     fetchCategory();
   }, [categoryId]);
 
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/home/services/${id}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        setServices(services.filter((service) => service._id !== id));
+      } else {
+        console.error('Failed to delete service:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Failed to delete service:', error);
+    }
+  };
+
+
   return (
     <div className="category-container">
       <h2 className="category-title">{category.title}</h2>
       <br />
 
       <h2 className="services-title">Services in this Category</h2>
-      <div className="services-grid">
+      {/* <div className="services-grid">
         {services.map((service) => (
           <div key={service._id} className="service-item" style={{ backgroundColor: '#3B3C36', color: 'white' }}>
             <img
@@ -126,6 +69,44 @@ const Category = () => {
               </Link>
           </div>
         ))}
+      </div> */}
+      <div className="services-grid">
+        {services && services.length > 0 ? (
+          services.map((service) => (
+            <div key={service._id} className="service-item">
+              <img
+                src={service.image}
+                alt="Service"
+                className="service-image"
+                style={{ width: '200px', height: '150px', objectFit: 'cover' }}
+              />
+              <br></br>
+              <h4 className="service-title">{service.title}</h4>
+              <br></br>
+              <p className="service-description">
+                Description: {service.description.length > 110 ? `${service.description.slice(0, 110)}...` : service.description}
+              </p>
+              <p className="service-charges">Charges: {service.charges}</p>
+              <p className="service-duration">Duration: {service.duration}</p>
+
+              <div className="button-container">
+                <Link to={`/services/${service._id}`} className="view-button">
+                  View Details
+                </Link>
+                {window.localStorage.getItem("UserId") === service.userId && (
+                  <>
+                    <button className="delete-button" onClick={() => handleDelete(service._id)}>Delete</button>
+                    <Link className="update-button" to={`/services/edit/${service._id}`} >
+                      Update
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No services available.</p>
+        )}
       </div>
     </div>
   );

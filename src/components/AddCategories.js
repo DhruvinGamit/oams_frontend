@@ -1,4 +1,64 @@
-// AddCategories.js
+// // AddCategories.js
+// import React, { useState } from 'react';
+
+// const AddCategories = () => {
+//   const [categoryData, setCategoryData] = useState({
+//     title: '',
+//     image: '', 
+//   });
+
+//   const handleInputChange = (e) => {
+//     setCategoryData({ ...categoryData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       const response = await fetch('http://localhost:8080/api/category/add', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(categoryData),
+//       });
+
+//       if (response.ok) {
+//         console.log('Category added successfully');
+//       } else {
+//         console.error('Failed to add category:', response.statusText);
+//       }
+//     } catch (error) {
+//       console.error('Failed to add category:', error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2>Add Category</h2>
+//       <form onSubmit={handleSubmit}>
+//         <input
+//           type="text"
+//           placeholder="Category Title"
+//           name="title"
+//           value={categoryData.title}
+//           onChange={handleInputChange}
+//         />
+//         <input
+//           type="text"
+//           placeholder="Image URL"
+//           name="image"
+//           value={categoryData.image}
+//           onChange={handleInputChange}
+//         />
+//         <button type="submit">Add Category</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default AddCategories;
+
+
 import React, { useState } from 'react';
 
 const AddCategories = () => {
@@ -6,6 +66,8 @@ const AddCategories = () => {
     title: '',
     image: '', 
   });
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleInputChange = (e) => {
     setCategoryData({ ...categoryData, [e.target.name]: e.target.value });
@@ -13,6 +75,9 @@ const AddCategories = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccessMessage('');
+    
     try {
       const response = await fetch('http://localhost:8080/api/category/add', {
         method: 'POST',
@@ -23,18 +88,22 @@ const AddCategories = () => {
       });
 
       if (response.ok) {
-        console.log('Category added successfully');
+        setSuccessMessage('Category added successfully');
+        setCategoryData({ title: '', image: '' }); // Clear form fields
       } else {
-        console.error('Failed to add category:', response.statusText);
+        const errorMessage = await response.text();
+        setError(`Failed to add category: ${errorMessage}`);
       }
     } catch (error) {
-      console.error('Failed to add category:', error);
+      setError('Failed to add category: Please try again later');
     }
   };
 
   return (
     <div>
       <h2>Add Category</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -42,13 +111,15 @@ const AddCategories = () => {
           name="title"
           value={categoryData.title}
           onChange={handleInputChange}
+          required
         />
         <input
-          type="text"
+          type="url"
           placeholder="Image URL"
           name="image"
           value={categoryData.image}
           onChange={handleInputChange}
+          required
         />
         <button type="submit">Add Category</button>
       </form>

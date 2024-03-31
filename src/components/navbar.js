@@ -157,6 +157,7 @@ const Navbar = () => {
               </Link>
             </li>
           )}
+          
           {userId && (
             <li className="logout-button" style={{ marginLeft: 800 }}>
               <button onClick={handleLogout}>Logout</button>
