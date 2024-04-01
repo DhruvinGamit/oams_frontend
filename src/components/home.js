@@ -203,7 +203,7 @@ const Home = ({  }) => {
                     backgroundRepeat: 'no-repeat',
                   }}
                 >
-                  <h4 className="category-title">{category.title}</h4>
+                  {/* <h4 className="category-title">{category.title}</h4> */}
                 </div>
               </Link>
             ))
