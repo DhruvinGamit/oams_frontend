@@ -48,7 +48,7 @@ const Category = () => {
       <h2 className="category-title">{category.title}</h2>
       <br />
 
-      <h2 className="services-title">Services in this Category</h2>
+      <h2 className="services-title"> Available Services</h2>
       {/* <div className="services-grid">
         {services.map((service) => (
           <div key={service._id} className="service-item" style={{ backgroundColor: '#3B3C36', color: 'white' }}>

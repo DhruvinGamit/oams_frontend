@@ -175,8 +175,8 @@ const ServiceDetails = () => {
         style={{ height: '100%', width: 'auto', backgroundRepeat: 'no-repeat' }}
       />
       <p>Description: {service?.description}</p>
-      <p>Charges: {service?.charges}</p>
-      <p>Duration: {service?.duration}</p>
+      <p>Charges: {service?.charges} (in rupees)</p>
+      <p>Duration: {service?.duration} (in minutes)</p>
       {service?.address && (
         <div className="address-details">
           <h3>Address</h3>

@@ -279,7 +279,7 @@ const AppointmentForm = () => {
       key: process.env.REACT_APP_API_KEY,
       amount: amount_to_pay,
       currency: data.currency,
-      name: `Package: ${AppointmentData.packageName}`,
+      name: `Package: Appointy`,
       description: "Testing",
       image: AppointmentData.packImage,
       order_id: data.id,
@@ -428,7 +428,7 @@ const AppointmentForm = () => {
           serviceId: id,
           date: formattedDate,
           time: formattedTime,
-          paymentId: orderData.id, // Assuming 'id' is the payment ID
+          paymentId: orderData.id, 
         }),
       });
 
