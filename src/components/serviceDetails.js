@@ -1,91 +1,5 @@
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useParams , Link } from 'react-router-dom';
-// import '../styles/ServiceDetails.css';
-
-// const ServiceDetails = () => {
-//   const [service, setService] = useState(null);
-//   const { id } = useParams();
-//   const isAuthenticated = window.localStorage.getItem("UserId");
-//   const [showLoginAlert, setShowLoginAlert] = useState(false); // State to control alert visibility
-
-//   useEffect(() => {
-//     const fetchServiceDetails = async () => {
-//       try {
-//         const response = await fetch(`http://localhost:8080/api/home/services/${id}`);
-//         if (response.ok) {
-//           const data = await response.json();
-//           setService(data.service);
-//         } else {
-//           console.error('Failed to fetch service details:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Failed to fetch service details:', error);
-//       }
-//     };
-
-//     fetchServiceDetails();
-//   }, [id]);
-
-//   const handleAppointClick = () => {
-//     if (!isAuthenticated) {
-//       // Show login alert if not authenticated
-//       setShowLoginAlert(true);
-//     }
-//   };
-
-//   return (
-//     <div className="service-details-container">
-//       <h2>{service?.title}</h2>
-//       <img
-//         src={service?.image}
-//         alt={service?.title}
-//         className="service-details-image"
-//         style={{ height: '100%', width: 'auto', backgroundRepeat: 'no-repeat' }}
-//       />
-//       <p>Description: {service?.description}</p>
-//       <p>Charges: {service?.charges} (in rupees)</p>
-//       <p>Duration: {service?.duration} (in minutes)</p>
-//       {service?.address && (
-//         <div className="address-details">
-//           <h3>Address</h3>
-//           <p>Street: {service.address.street}</p>
-//           <p>City: {service.address.city}</p>
-//           <p>State: {service.address.state}</p>
-//           <p>Country: {service.address.country}</p>
-//           <p>ZIP Code: {service.address.zip}</p>
-//         </div>
-//       )}
-
-//       {showLoginAlert && (
-//         <div className="login-alert">
-//           <p>Please login to appoint this service.</p>
-//           {/* <button onClick={() => setShowLoginAlert(false)}>Close</button> */}
-//         </div>
-//       )}
-
-//       <br/><br/>
-//       {isAuthenticated && (
-//         <Link to={`/appoint/${id}`} className="appoint-button">
-//           Appoint
-//         </Link>
-//       )}
-//       {!isAuthenticated && (
-//         <button className="appoint-button" onClick={handleAppointClick}>
-//           Appoint
-//         </button>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default ServiceDetails;
-
-
 import React, { useState, useEffect } from 'react';
-import { useParams , Link } from 'react-router-dom';
-import '../styles/ServiceDetails.css';
+import { useParams, Link } from 'react-router-dom';
 
 const ServiceDetails = () => {
   const [service, setService] = useState(null);
@@ -119,44 +33,53 @@ const ServiceDetails = () => {
   };
 
   return (
-    <div className="service-details-container">
-      <h2 className="text-center">{service?.title}</h2>
-      <div className="service-details-content">
-        <div className="service-details-left">
+    <div style={{ 
+      background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}>
+      <div style={{ flex: 1, padding: "20px" }}>
+        <img
+          src="https://cdni.iconscout.com/illustration/premium/thumb/man-booking-online-appointment-4207646-3485596.png"
+          alt="Calendar"
+          style={{ width: "50%", height: "auto" }}
+        />
+      </div>
+      <div style={{ flex: 1, padding: "20px", maxWidth: "600px" }}>
+        <div style={{ padding: "20px", borderRadius: "10px", boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.1)", background: "white" }}>
+          <h2>{service?.title}</h2>
           <img
             src={service?.image}
             alt={service?.title}
-            className="service-details-image"
+            style={{ width: "25%", height: "auto", marginBottom: "10px", borderRadius: "8px" }}
           />
-        </div>
-        <div className="service-details-right">
           <p>Description: {service?.description}</p>
           <p>Charges: {service?.charges} (in rupees)</p>
           <p>Duration: {service?.duration} (in minutes)</p>
           {service?.address && (
             <div className="address-details">
               <h3>Address</h3>
-              <p>Street: {service.address.street}</p>
-              <p>City: {service.address.city}</p>
-              <p>State: {service.address.state}</p>
-              <p>Country: {service.address.country}</p>
+              <p>Street: {service.address.street} | City: {service.address.city} | State: {service.address.state} | Country: {service.address.country}</p>
               <p>ZIP Code: {service.address.zip}</p>
             </div>
           )}
-          <br/><br/>
+
           {showLoginAlert && (
-            <div className="login-alert">
+            <div style={{ marginTop: "20px", padding: "10px", backgroundColor: "#f8d7da", color: "#721c24", border: "1px solid #f5c6cb", borderRadius: "5px" }}>
               <p>Please login to appoint this service.</p>
-              {/* <button onClick={() => setShowLoginAlert(false)}>Close</button> */}
             </div>
           )}
+
+          <br/><br/>
           {isAuthenticated && (
-            <Link to={`/appoint/${id}`} className="appoint-button">
+            <Link to={`/appoint/${id}`} style={{ backgroundColor: "#007bff", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", textDecoration: "none", cursor: "pointer", display: "inline-block", transition: "background-color 0.3s" }}>
               Appoint
             </Link>
           )}
           {!isAuthenticated && (
-            <button className="appoint-button" onClick={handleAppointClick}>
+            <button onClick={handleAppointClick} style={{ backgroundColor: "#007bff", color: "white", padding: "10px 20px", border: "none", borderRadius: "5px", textDecoration: "none", cursor: "pointer", display: "inline-block", transition: "background-color 0.3s" }}>
               Appoint
             </button>
           )}
