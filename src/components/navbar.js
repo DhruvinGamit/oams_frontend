@@ -1,84 +1,4 @@
-
-// // Navbar.js
-// import React from "react";
-// import { Link, useNavigate } from "react-router-dom";
-// import "../styles/Navbar.css";
-// import { logout } from "../utils/localStorage";
-
-// const Navbar = () => {
-//   const navigate = useNavigate();
-
-//   const handleLogout = () => {
-//     logout();
-//     navigate("/");
-//   };
-
-//   const userId = window.localStorage.getItem("UserId");
-//   const isProvider = window.localStorage.getItem("IsProvider");
-
-//   return (
-//     <nav className="navbar">
-//       <div className="navbar-container">
-//         <ul className="navbar-links" style={{ color: "lightblue", fontSize: 18 }}>
-//           <li>
-//             <Link to="/" className="navbar-link" style={{ color: "lightblue", fontSize: 20 }}>
-//               Appointy
-//             </Link>
-//           </li>
-//           <li>
-//             <Link to="/home" className="navbar-link">
-//               Home
-//             </Link>
-//           </li>
-//           {userId && isProvider === "true" && (
-//             <li>
-//               <Link to="/addServices" className="navbar-link">
-//                 Add services
-//               </Link>
-//             </li>
-//           )}
-//           {!userId && (
-//             <>
-//               <li>
-//                 <Link to="/register" className="navbar-link">
-//                   Register
-//                 </Link>
-//               </li>
-//               <li>
-//                 <Link to="/login" className="navbar-link">
-//                   Login
-//                 </Link>
-//               </li>
-//             </>
-//           )}
-//           {userId && isProvider === "true" && (
-//             <li>
-//               <Link to="/service-appointments" className="navbar-link">
-//                 Service Appointments
-//               </Link>
-//             </li>
-//           )}
-//           {userId && (
-//             <li>
-//               <Link to="/requested-services" className="navbar-link">
-//                 Requested Services
-//               </Link>
-//             </li>
-//           )}
-          
-//           {userId && (
-//             <li className="logout-button" style={{ marginLeft: 800 }}>
-//               <button onClick={handleLogout}>Logout</button>
-//             </li>
-//           )}
-//         </ul>
-//       </div>
-//     </nav>
-//   );
-// };
-
 // export default Navbar;
-
 
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -94,7 +14,7 @@ const Navbar = () => {
 
   const userId = window.localStorage.getItem("UserId");
   const isProvider = window.localStorage.getItem("IsProvider");
-  const userEmail = window.localStorage.getItem("UserEmail"); 
+  const userEmail = window.localStorage.getItem("UserEmail");
   const formattedEmail = userEmail ? userEmail.split('@')[0] : '';
 
   return (
@@ -102,8 +22,9 @@ const Navbar = () => {
       <div style={{ display: "flex", justifyContent: "space-between" }} className="navbar-container">
         <ul style={{ listStyleType: "none", display: "flex", alignItems: "center" }} className="navbar-links">
           <li>
-            <Link to="/" style={{ textDecoration: "none", color: "#3ec8d8", marginRight: "20px" }} className="navbar-link">
-              Appointy
+            {/* Replacing "Appointy" with image */}
+            <Link to="/" style={{ marginRight: "20px" }} className="navbar-link">
+              <img src="https://info.cegedim-healthcare.co.uk/hubfs/CHS_Appointments%20logo.png" alt="Appointy Logo" style={{ height: "30px" }} />
             </Link>
           </li>
           <li>

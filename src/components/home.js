@@ -1,146 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import '../styles/Home.css';
-
-// const Home = ({  }) => {
-//   const [services, setServices] = useState([]);
-//   const [categories, setCategories] = useState([]);
-
-//   console.log("home page : " , window.localStorage.getItem("UserId"))
-
-//   useEffect(() => {
-//     const fetchServices = async () => {
-//       try {
-//         const response = await fetch('http://localhost:8080/api/home/categories');
-//         if (response.ok) {
-//           const data = await response.json();
-//           setCategories(data.categories);
-//         } else {
-//           console.error('Failed to fetch categories:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Failed to fetch categories:', error);
-//       }
-//     };
-
-//     fetchServices();
-//   }, []);
-
-//   useEffect(() => {
-//     const fetchServices = async () => {
-//       try {
-//         const response = await fetch('http://localhost:8080/api/home/services');
-//         if (response.ok) {
-//           const data = await response.json();
-//           setServices(data.services);
-//         } else {
-//           console.error('Failed to fetch services:', response.statusText);
-//         }
-//       } catch (error) {
-//         console.error('Failed to fetch services:', error);
-//       }
-//     };
-
-//     fetchServices();
-//   }, []);
-
-//   const handleDelete = async (id) => {
-//     try {
-//       const response = await fetch(`http://localhost:8080/api/home/services/${id}`, {
-//         method: 'DELETE',
-//       });
-//       if (response.ok) {
-//         setServices(services.filter((service) => service._id !== id));
-//       } else {
-//         console.error('Failed to delete service:', response.statusText);
-//       }
-//     } catch (error) {
-//       console.error('Failed to delete service:', error);
-//     }
-//   };
-
-//   return (
-//     <div className="services-container">
-//       <h2 className="services-title">Categories</h2>
-//       <br />
-//       <br />
-//       <div className="categories-container">
-//         <h2 className="categories-title"></h2>
-//         <br />
-//         <div className="category-grid">
-//           {categories && categories.length > 0 ? (
-//             categories.map((category) => (
-//               <Link key={category._id} to={`/category/${category._id}`} className="view-button2">
-//                 <div
-//                   key={category._id}
-//                   className="service-item"
-//                   style={{
-//                     backgroundImage: `url(${category.image})`,
-//                     color: 'black',
-//                     width: '233px',
-//                     height: '80px',
-//                     backgroundRepeat: 'no-repeat',
-//                   }}
-//                 >
-//                   {/* <h4 className="category-title">{category.title}</h4> */}
-//                 </div>
-//               </Link>
-//             ))
-//           ) : (
-//             <p>No categories available.</p>
-//           )}
-//         </div>
-//       </div>
-//       <br />
-//       <br />
-//       <h2 className="services-title">Services</h2>
-//       <br /> <br />
-//       <div className="services-grid">
-//         {services && services.length > 0 ? (
-//           services.map((service) => (
-//             <div key={service._id} className="service-item">
-//               <img
-//                 src={service.image}
-//                 alt="Service"
-//                 className="service-image"
-//                 style={{ width: '200px', height: '150px', objectFit: 'cover' }}
-//               />
-//               <br></br>
-//               <h4 className="service-title">{service.title}</h4>
-//               <br></br>
-//               <p className="service-description">
-//                 Description: {service.description.length > 110 ? `${service.description.slice(0, 110)}...` : service.description}
-//               </p>
-//               <p className="service-charges">Charges: {service.charges}</p>
-//               <p className="service-duration">Duration: {service.duration}</p>
-
-//               <div className="button-container">
-//                 <Link to={`/services/${service._id}`} className="view-button">
-//                   View Details
-//                 </Link>
-//                 {window.localStorage.getItem("UserId") === service.userId && (
-//                   <>
-//                     <button className="delete-button" onClick={() => handleDelete(service._id)}>Delete</button>
-//                     <Link className="update-button" to={`/services/edit/${service._id}`} >
-//                       Update
-//                     </Link>
-//                   </>
-//                 )}
-//               </div>
-//             </div>
-//           ))
-//         ) : (
-//           <p>No services available.</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
-
-//--------------------------------------------------------------------------------------------------------------------
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Home.css";
@@ -220,101 +77,138 @@ const Home = ({}) => {
   );
 
   return (
-    <div className="services-container">
-      <h2 className="search-title">Search Services</h2>
-      <input
-        type="text"
-        placeholder="Enter Title, City, ZIP Code or State"
-        value={searchQuery}
-        onChange={handleSearch}
-        style={{ width: "300px" }}
-      />
+    <div style={{ 
+      background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+      minHeight: "100vh",
+      }}>
+      <div className="home-container">
+        <div className="heading-section" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", padding: "20px", borderRadius: "10px", marginBottom: "20px", textAlign: "left" }}>
+          <h2 className="heading">Search Services</h2>
+          <input
+            type="text"
+            placeholder="Enter Title, City, ZIP Code, or State"
+            value={searchQuery}
+            onChange={handleSearch}
+            style={{ width: "1000px", borderRadius: "50px", padding: "10px", borderColor: "whitesmoke"}}
+          />
+        </div>
 
-      <br />
-      <br />
-      <h2 className="categories-title">Categories</h2>
-      <br />
-      <br />
-      <div className="categories-container">
-        <div className="category-grid">
-          {categories && categories.length > 0 ? (
-            categories.map((category) => (
-              <Link
-                key={category._id}
-                to={`/category/${category._id}`}
-                className="view-button2"
-              >
-                <div
+        <div className="heading-section" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", padding: "20px", borderRadius: "50px", marginBottom: "20px", textAlign: "left", position: "relative" }}>
+          <h2 className="heading">Categories</h2>
+          <div className="underline-square" style={{ backgroundColor: "#ffffff", position: "absolute", bottom: "-5px", left: "20px", width: "95%", height: "5px" }}></div>
+        </div>
+        <br></br>
+        <div className="categories-container">
+          <div className="category-grid">
+            {categories && categories.length > 0 ? (
+              categories.map((category) => (
+                <Link
                   key={category._id}
-                  className="service-item"
-                  style={{
-                    backgroundImage: `url(${category.image})`,
-                    color: "black",
-                    width: "233px",
-                    height: "80px",
-                    backgroundRepeat: "no-repeat",
-                  }}
+                  to={`/category/${category._id}`}
+                  className="view-button2"
                 >
-                  {/* <h4 className="category-title">{category.title}</h4> */}
+                  <div
+                    key={category._id}
+                    className="service-item"
+                    style={{
+                      backgroundImage: `url(${category.image})`,
+                      color: "black",
+                      width: "233px",
+                      height: "80px",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  >
+                    {/* <h4 className="category-title">{category.title}</h4> */}
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p>No categories available.</p>
+            )}
+          </div>
+        </div>
+        <br></br>
+        <div className="heading-section" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", padding: "20px", borderRadius: "50px", marginBottom: "20px", textAlign: "left", position: "relative" }}>
+          <h2 className="heading">Services</h2>
+          <div className="underline-square" style={{ backgroundColor: "#ffffff", position: "absolute", bottom: "-5px", left: "20px", width: "95%", height: "5px" }}></div>
+        </div>
+        <br></br>
+        <div className="services-grid">
+          {filteredServices.length > 0 ? (
+            filteredServices.slice(-5).map((service) => (
+              <div key={service._id} className="service-item">
+                <img
+                  src={service.image}
+                  alt="Service"
+                  className="service-image"
+                  style={{ width: "200px", height: "150px", objectFit: "cover" }}
+                />
+                <br />
+                <h4 className="service-title">{service.title}</h4>
+                <br />
+                <p className="service-description">
+                  Description:{" "}
+                  {service.description.length > 110
+                    ? `${service.description.slice(0, 110)}...`
+                    : service.description}
+                </p>
+                <p className="service-charges">Charges: {service.charges}</p>
+                <p className="service-duration">Duration: {service.duration}</p>
+                <div className="button-container">
+                  <Link to={`/services/${service._id}`} className="view-button">
+                    View Details
+                  </Link>
+                  {window.localStorage.getItem("UserId") === service.userId && (
+                    <>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(service._id)}
+                      >
+                        Delete
+                      </button>
+                      <Link
+                        className="update-button"
+                        to={`/services/edit/${service._id}`}
+                      >
+                        Update
+                      </Link>
+                    </>
+                  )}
                 </div>
-              </Link>
+              </div>
             ))
           ) : (
-            <p>No categories available.</p>
+            <p>No services match the search criteria.</p>
           )}
         </div>
       </div>
-      <br />
-      <br />
-      <h2 className="services-title">Services</h2>
-      <div className="services-grid">
-        {filteredServices.length > 0 ? (
-          filteredServices.map((service) => (
-            <div key={service._id} className="service-item">
-              <img
-                src={service.image}
-                alt="Service"
-                className="service-image"
-                style={{ width: "200px", height: "150px", objectFit: "cover" }}
-              />
-              <br></br>
-              <h4 className="service-title">{service.title}</h4>
-              <br></br>
-              <p className="service-description">
-                Description:{" "}
-                {service.description.length > 110
-                  ? `${service.description.slice(0, 110)}...`
-                  : service.description}
-              </p>
-              <p className="service-charges">Charges: {service.charges}</p>
-              <p className="service-duration">Duration: {service.duration}</p>
-
-              <div className="button-container">
-                <Link to={`/services/${service._id}`} className="view-button">
-                  View Details
-                </Link>
-                {window.localStorage.getItem("UserId") === service.userId && (
-                  <>
-                    <button
-                      className="delete-button"
-                      onClick={() => handleDelete(service._id)}
-                    >
-                      Delete
-                    </button>
-                    <Link
-                      className="update-button"
-                      to={`/services/edit/${service._id}`}
-                    >
-                      Update
-                    </Link>
-                  </>
-                )}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No services match the search criteria.</p>
-        )}
+      <br></br>
+      <div style={{ background: "black", color: "white", padding: "20px 0", display: "flex", justifyContent: "space-between", alignItems: "center", textAlign: "center" }}>
+        <div style={{ flex: 1 }}>
+          <h3>All Services</h3>
+          <ul>
+            {services.slice(-5).map((service) => (
+              <li key={service._id}>{service.title}</li>
+            ))}
+          </ul>
+        </div>
+        <div style={{ flex: 1 }}>
+          <h3>Follow Us</h3>
+          <div>
+            <a href="https://facebook.com"><img src="https://1000logos.net/wp-content/uploads/2017/02/Facebook-Logosu.png" alt="Facebook" style={{ width: "60px", marginRight: "10px" }} /></a>
+            <a href="https://linkedin.com"><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="LinkedIn" style={{ width: "30px", marginRight: "10px" }} /></a>
+            <a href="https://instagram.com"><img src="https://static-00.iconduck.com/assets.00/instagram-icon-2048x2048-uc6feurl.png" alt="Instagram" style={{ width: "30px", marginRight: "10px" }}  /></a>
+          </div>
+        </div>
+        <div style={{ flex: 1 }}>
+          <p>Email: appoitmentsystem@gmail.com</p>
+          <p>Phone: 9865896349</p>
+          <p>Address: Junathana Panchatdi Near santoshimata temple, nadiad (396445), Gujarat, India</p>
+        </div>
+        <br></br>
+        <div style={{ flex: 1 }}>
+          <p>@2024 Appointy | All Right Reserved</p>
+        </div>
       </div>
     </div>
   );
