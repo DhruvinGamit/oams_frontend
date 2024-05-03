@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
-import '../styles/Admin.css'; // Import CSS file
+import { Link, useNavigate } from 'react-router-dom';
 
 const Admin = () => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,34 +23,33 @@ const Admin = () => {
     fetchUsers();
   }, []);
 
+  const handleLogout = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="admin-container">
-      <li>
-            <Link to="/categories" className="navbar-link">
+      <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <ul className="navbar-links">
+          <Link  to="/categories" style={{ backgroundColor: "blue", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }} >
             Add Category
-            </Link>
-          </li>
-      <h2>Admin Panel</h2>
-      <table className="user-table">
-        <thead>
-          <tr>
-            <th>Email</th>
-            <th>Full Name</th>
-            <th>Address</th>
-            <th>Contact</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <td>{user.email}</td>
-              <td>{user.fullName}</td>
-              <td>{user.address}</td>
-              <td>{user.contact}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+          </Link>
+          <button style={{ backgroundColor: "blue", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }}>Service Providers</button>
+
+        </ul>
+        
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <b className="navbar-item welcome-admin" style={{ marginRight: "10px" }}>
+            Welcome, Admin
+          </b>
+          <button style={{ backgroundColor: "red", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }} onClick={handleLogout}>Logout</button>
+        </div>
+      </nav>
+      <div className="user-table-container">
+        <table className="user-table">
+          {/* Your table content here */}
+        </table>
+      </div>
     </div>
   );
 };
