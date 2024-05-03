@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Admin = () => {
   const [users, setUsers] = useState([]);
+  const [showProviders, setShowProviders] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,15 +28,43 @@ const Admin = () => {
     navigate("/home");
   };
 
+  const deleteProvider = async (email) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/users/deleteProvider/${email}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log(`Provider with email ${email} deleted successfully`);
+        setUsers(prevUsers => prevUsers.filter(user => user.email !== email));
+      } else {
+        console.error(`Failed to delete provider with email ${email}`);
+      }
+    } catch (error) {
+      console.error('Error deleting provider:', error);
+    }
+  };
+
   return (
-    <div className="admin-container">
+    <div className="admin-container" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", minHeight: "100vh" }}>
       <nav style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <ul className="navbar-links">
-          <Link  to="/categories" style={{ backgroundColor: "blue", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }} >
+          <Link to="/categories" style={{ backgroundColor: "#007bff", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }} >
             Add Category
           </Link>
-          <button style={{ backgroundColor: "blue", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }}>Service Providers</button>
-
+          <button 
+            style={{ 
+              backgroundColor: "#007bff", 
+              border: "none", 
+              color: "#fff", 
+              cursor: "pointer", 
+              padding: "5px 10px", 
+              borderRadius: "50px" 
+            }} 
+            onClick={() => setShowProviders(true)}
+          >
+            Service Providers
+          </button>
         </ul>
         
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -45,11 +74,36 @@ const Admin = () => {
           <button style={{ backgroundColor: "red", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "50px" }} onClick={handleLogout}>Logout</button>
         </div>
       </nav>
-      <div className="user-table-container">
-        <table className="user-table">
-          {/* Your table content here */}
-        </table>
-      </div>
+      {showProviders && (
+        <div className="user-table-container">
+          <h2>Service Providers</h2>
+          <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "10px" }}>
+            <thead>
+              <tr>
+                <th style={{ border: "2px solid #000000", padding: "8px" }}>Email</th>
+                <th style={{ border: "2px solid #000000", padding: "8px" }}>Full Name</th>
+                <th style={{ border: "2px solid #000000", padding: "8px" }}>Address</th>
+                <th style={{ border: "2px solid #000000", padding: "8px" }}>Contact</th>
+                <th style={{ border: "2px solid #000000", padding: "8px" }}>Delete Provider</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.filter(user => user.isProvider).map(provider => (
+                <tr key={provider.email}>
+                  <td style={{ border: "2px solid #000000", padding: "8px" }}>{provider.email}</td>
+                  <td style={{ border: "2px solid #000000", padding: "8px" }}>{provider.fullName}</td>
+                  <td style={{ border: "2px solid #000000", padding: "8px" }}>{provider.address}</td>
+                  <td style={{ border: "2px solid #000000", padding: "8px" }}>{provider.contact}</td>
+                  <td style={{ border: "2px solid #000000", padding: "8px" }}>
+                    <button style={{ backgroundColor: "red", border: "none", color: "#fff", cursor: "pointer", padding: "5px 10px", borderRadius: "8px" }} onClick={() => deleteProvider(provider.email)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <button style={{ backgroundColor: "#007bff", border: "none", color: "#fff", cursor: "pointer", padding: "10px 20px", borderRadius: "8px", marginTop: "20px" }} onClick={() => setShowProviders(false)}>Back</button>
+        </div>
+      )}
     </div>
   );
 };
