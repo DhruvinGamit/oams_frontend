@@ -1,6 +1,3 @@
-// export default AddCategories;
-
-
 import React, { useState } from 'react';
 
 const AddCategories = () => {
