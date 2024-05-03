@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import detailsPage from "../images/detailsPage.webp"
 
 const ServiceDetails = () => {
   const [service, setService] = useState(null);
@@ -27,7 +28,6 @@ const ServiceDetails = () => {
 
   const handleAppointClick = () => {
     if (!isAuthenticated) {
-      // Show login alert if not authenticated
       setShowLoginAlert(true);
     }
   };
@@ -41,8 +41,8 @@ const ServiceDetails = () => {
       justifyContent: "center",
     }}>
       <div style={{ flex: 1, padding: "20px" }}>
-        <img
-          src="https://cdni.iconscout.com/illustration/premium/thumb/man-booking-online-appointment-4207646-3485596.png"
+      <img
+          src={detailsPage}
           alt="Calendar"
           style={{ width: "50%", height: "auto" }}
         />

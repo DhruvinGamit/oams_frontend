@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/Register.css';
+import register from "../images/register.webp";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -95,7 +96,7 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="image-container">
-        <img src="https://cdni.iconscout.com/illustration/premium/thumb/sign-up-3391266-2937870.png" alt="Sign Up" />
+        <img src={register} alt="Sign Up" />
       </div>
       <div className="form-container">
         <h2>Register</h2>

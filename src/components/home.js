@@ -77,25 +77,61 @@ const Home = ({}) => {
   );
 
   return (
-    <div style={{ 
-      background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
-      minHeight: "100vh",
-      }}>
+    <div
+      style={{
+        background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+        minHeight: "100vh",
+      }}
+    >
       <div className="home-container">
-        <div className="heading-section" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", padding: "20px", borderRadius: "10px", marginBottom: "20px", textAlign: "left" }}>
+        <div
+          className="heading-section"
+          style={{
+            background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+            padding: "20px",
+            borderRadius: "10px",
+            marginBottom: "20px",
+            textAlign: "left",
+          }}
+        >
           <h2 className="heading">Search Services</h2>
           <input
             type="text"
             placeholder="Enter Title, City, ZIP Code, or State"
             value={searchQuery}
             onChange={handleSearch}
-            style={{ width: "1000px", borderRadius: "50px", padding: "10px", borderColor: "whitesmoke"}}
+            style={{
+              width: "1000px",
+              borderRadius: "50px",
+              padding: "10px",
+              borderColor: "whitesmoke",
+            }}
           />
         </div>
 
-        <div className="heading-section" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", padding: "20px", borderRadius: "50px", marginBottom: "20px", textAlign: "left", position: "relative" }}>
+        <div
+          className="heading-section"
+          style={{
+            background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+            padding: "20px",
+            borderRadius: "50px",
+            marginBottom: "20px",
+            textAlign: "left",
+            position: "relative",
+          }}
+        >
           <h2 className="heading">Categories</h2>
-          <div className="underline-square" style={{ backgroundColor: "#ffffff", position: "absolute", bottom: "-5px", left: "20px", width: "95%", height: "5px" }}></div>
+          <div
+            className="underline-square"
+            style={{
+              backgroundColor: "#ffffff",
+              position: "absolute",
+              bottom: "-5px",
+              left: "20px",
+              width: "95%",
+              height: "5px",
+            }}
+          ></div>
         </div>
         <br></br>
         <div className="categories-container">
@@ -109,12 +145,12 @@ const Home = ({}) => {
                 >
                   <div
                     key={category._id}
-                    className="service-item"
+                    className="category-item"
                     style={{
                       backgroundImage: `url(${category.image})`,
                       color: "black",
-                      width: "233px",
-                      height: "80px",
+                      width: "210px",
+                      height: "150px",
                       backgroundRepeat: "no-repeat",
                     }}
                   >
@@ -128,9 +164,29 @@ const Home = ({}) => {
           </div>
         </div>
         <br></br>
-        <div className="heading-section" style={{ background: "linear-gradient(to right, #A9f1df, #FFBBBB)", padding: "20px", borderRadius: "50px", marginBottom: "20px", textAlign: "left", position: "relative" }}>
+        <div
+          className="heading-section"
+          style={{
+            background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+            padding: "20px",
+            borderRadius: "50px",
+            marginBottom: "20px",
+            textAlign: "left",
+            position: "relative",
+          }}
+        >
           <h2 className="heading">Services</h2>
-          <div className="underline-square" style={{ backgroundColor: "#ffffff", position: "absolute", bottom: "-5px", left: "20px", width: "95%", height: "5px" }}></div>
+          <div
+            className="underline-square"
+            style={{
+              backgroundColor: "#ffffff",
+              position: "absolute",
+              bottom: "-5px",
+              left: "20px",
+              width: "95%",
+              height: "5px",
+            }}
+          ></div>
         </div>
         <br></br>
         <div className="services-grid">
@@ -141,7 +197,11 @@ const Home = ({}) => {
                   src={service.image}
                   alt="Service"
                   className="service-image"
-                  style={{ width: "200px", height: "150px", objectFit: "cover" }}
+                  style={{
+                    width: "200px",
+                    height: "150px",
+                    objectFit: "cover",
+                  }}
                 />
                 <br />
                 <h4 className="service-title">{service.title}</h4>
@@ -160,18 +220,23 @@ const Home = ({}) => {
                   </Link>
                   {window.localStorage.getItem("UserId") === service.userId && (
                     <>
+                      <Link
+                        className="edit-button"
+                        to={`/services/edit/${service._id}`}
+                      >
+                        Edit
+                      </Link>
                       <button
                         className="delete-button"
                         onClick={() => handleDelete(service._id)}
+                        style={{
+                          width: "75px",
+                          height: "38px",
+                          objectFit: "cover",
+                        }}
                       >
                         Delete
                       </button>
-                      <Link
-                        className="update-button"
-                        to={`/services/edit/${service._id}`}
-                      >
-                        Update
-                      </Link>
                     </>
                   )}
                 </div>
@@ -183,27 +248,58 @@ const Home = ({}) => {
         </div>
       </div>
       <br></br>
-      <div style={{ background: "black", color: "white", padding: "20px 0", display: "flex", justifyContent: "space-between", alignItems: "center", textAlign: "center" }}>
+      <div
+        style={{
+          background: "black",
+          color: "white",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          textAlign: "center",
+        }}
+      >
         <div style={{ flex: 1 }}>
-          <h3>All Services</h3>
+          <h3> Categories</h3>
           <ul>
-            {services.slice(-5).map((service) => (
-              <li key={service._id}>{service.title}</li>
+            {categories.slice(0, 5).map((category) => (
+              <li key={category._id}>{category.title}</li>
             ))}
           </ul>
         </div>
+
         <div style={{ flex: 1 }}>
           <h3>Follow Us</h3>
           <div>
-            <a href="https://facebook.com"><img src="https://1000logos.net/wp-content/uploads/2017/02/Facebook-Logosu.png" alt="Facebook" style={{ width: "60px", marginRight: "10px" }} /></a>
-            <a href="https://linkedin.com"><img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png" alt="LinkedIn" style={{ width: "30px", marginRight: "10px" }} /></a>
-            <a href="https://instagram.com"><img src="https://static-00.iconduck.com/assets.00/instagram-icon-2048x2048-uc6feurl.png" alt="Instagram" style={{ width: "30px", marginRight: "10px" }}  /></a>
+            <a href="https://facebook.com">
+              <img
+                src="https://1000logos.net/wp-content/uploads/2017/02/Facebook-Logosu.png"
+                alt="Facebook"
+                style={{ width: "60px", marginRight: "10px" }}
+              />
+            </a>
+            <a href="https://linkedin.com">
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png"
+                alt="LinkedIn"
+                style={{ width: "30px", marginRight: "10px" }}
+              />
+            </a>
+            <a href="https://instagram.com">
+              <img
+                src="https://static-00.iconduck.com/assets.00/instagram-icon-2048x2048-uc6feurl.png"
+                alt="Instagram"
+                style={{ width: "30px", marginRight: "10px" }}
+              />
+            </a>
           </div>
         </div>
         <div style={{ flex: 1 }}>
-          <p>Email: appoitmentsystem@gmail.com</p>
+          <p>Email: onlineappointy@gmail.com</p>
           <p>Phone: 9865896349</p>
-          <p>Address: Junathana Panchatdi Near santoshimata temple, nadiad (396445), Gujarat, India</p>
+          <p>
+            Address: 102-sentolina , blosoom aura apartments, near canal, nadiad
+            (396445), Gujarat, India
+          </p>
         </div>
         <br></br>
         <div style={{ flex: 1 }}>

@@ -12,23 +12,12 @@ const Introduction = () => {
   return (
     <div className="introduction-container">
       <header className="introduction-header">
-        {/* <img
-          src="https://source.unsplash.com/1600x900/?appointment"
-          alt="Appointment Management System"
-          className="header-image"
-        /> */}
         <h1>Welcome to Appointy </h1>
         <p>Your Solution for Seamless Appointment Scheduling</p>
       </header>
 
       <section className="introduction-section">
         <h2>About Us</h2>
-        {/* <img
-          // src="https://source.unsplash.com/1600x900/?team"
-          src='../images/img1.jpg'
-          alt="Team Collaboration"
-          className="section-image"
-        /> */}
         <img
           src={img2}
           alt="Team Collaboration"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import moment from "moment-timezone"; // Import moment-timezone
+import upiAutopayImage from "../images/UPI-autopay-image.gif"
 
 const AppointmentForm = () => {
   const [date, setDate] = useState("");
@@ -211,7 +212,7 @@ const AppointmentForm = () => {
       >
         <div style={{ flex: 1 }}>
           <img
-            src="https://razorpay.com/blog-content/uploads/2020/12/UPI-autopay-image.gif"
+            src={upiAutopayImage}
             alt="Razorpay"
             style={{ maxWidth: "100%", height: "auto", borderRadius: "10px 0 0 10px" }}
           />

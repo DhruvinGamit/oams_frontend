@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import login from "../images/login.webp";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -54,7 +55,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="image-container">
-        <img src="https://cdni.iconscout.com/illustration/premium/thumb/login-10299071-8333958.png" alt="Login" />
+        <img src={login} alt="Login" />
       </div>
       <div className="form-container">
         <h2>Login</h2>

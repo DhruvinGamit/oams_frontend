@@ -21,10 +21,14 @@ const Navbar = () => {
     <nav style={{ backgroundColor: "#333", color: "#fff", padding: "10px 20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }} className="navbar-container">
         <ul style={{ listStyleType: "none", display: "flex", alignItems: "center" }} className="navbar-links">
-          <li>
-            {/* Replacing "Appointy" with image */}
+          {/* <li>
             <Link to="/" style={{ marginRight: "20px" }} className="navbar-link">
               <img src="https://info.cegedim-healthcare.co.uk/hubfs/CHS_Appointments%20logo.png" alt="Appointy Logo" style={{ height: "30px" }} />
+            </Link>
+          </li> */}
+          <li>
+            <Link to="/" style={{ textDecoration: "none", color: "#3ec8d8", marginRight: "20px" }} className="navbar-link">
+              Appointy
             </Link>
           </li>
           <li>
