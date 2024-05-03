@@ -1,8 +1,7 @@
-// export default Navbar;
-
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../utils/localStorage";
+import "../styles/Navbar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Navbar = () => {
   const formattedEmail = userEmail ? userEmail.split('@')[0] : '';
 
   return (
-    <nav style={{ backgroundColor: "#333", color: "#fff", padding: "10px 20px" }}>
+    <nav style={{ backgroundColor: "#333", color: "#fff", padding: "5px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }} className="navbar-container">
         <ul style={{ listStyleType: "none", display: "flex", alignItems: "center" }} className="navbar-links">
           {/* <li>
@@ -32,13 +31,17 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/home" style={{ textDecoration: "none", color: "#fff", marginRight: "20px" }} className="navbar-link">
+            <Link to="/home" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link" 
+            onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
+            onMouseLeave={(e) => e.target.style.boxShadow = 'none'}>
               Home
             </Link>
           </li>
           {userId && isProvider === "true" && (
             <li>
-              <Link to="/addServices" style={{ textDecoration: "none", color: "#fff", marginRight: "20px" }} className="navbar-link">
+              <Link to="/addServices" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link"
+              onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
+              onMouseLeave={(e) => e.target.style.boxShadow = 'none'}>
                 Add services
               </Link>
             </li>
@@ -46,12 +49,16 @@ const Navbar = () => {
           {!userId && (
             <>
               <li>
-                <Link to="/register" style={{ textDecoration: "none", color: "#fff", marginRight: "20px" }} className="navbar-link">
+                <Link to="/register" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link" 
+                onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
+                onMouseLeave={(e) => e.target.style.boxShadow = 'none'}>
                   Register
                 </Link>
               </li>
               <li>
-                <Link to="/login" style={{ textDecoration: "none", color: "#fff", marginRight: "20px" }} className="navbar-link">
+                <Link to="/login" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link" 
+                onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
+                onMouseLeave={(e) => e.target.style.boxShadow = 'none'}>
                   Login
                 </Link>
               </li>
@@ -59,14 +66,18 @@ const Navbar = () => {
           )}
           {userId && isProvider === "true" && (
             <li>
-              <Link to="/service-appointments" style={{ textDecoration: "none", color: "#fff", marginRight: "20px" }} className="navbar-link">
+              <Link to="/service-appointments" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link"
+              onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
+              onMouseLeave={(e) => e.target.style.boxShadow = 'none'}>
                 Service Appointments
               </Link>
             </li>
           )}
           {userId && (
             <li>
-              <Link to="/requested-services" style={{ textDecoration: "none", color: "#fff", marginRight: "20px" }} className="navbar-link">
+              <Link to="/requested-services" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link"
+              onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
+              onMouseLeave={(e) => e.target.style.boxShadow = 'none'}>
                 Requested Services
               </Link>
             </li>
