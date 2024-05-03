@@ -20,16 +20,16 @@ const Navbar = () => {
     <nav style={{ backgroundColor: "#333", color: "#fff", padding: "5px" }}>
       <div style={{ display: "flex", justifyContent: "space-between" }} className="navbar-container">
         <ul style={{ listStyleType: "none", display: "flex", alignItems: "center" }} className="navbar-links">
-          {/* <li>
+          <li>
             <Link to="/" style={{ marginRight: "20px" }} className="navbar-link">
               <img src="https://info.cegedim-healthcare.co.uk/hubfs/CHS_Appointments%20logo.png" alt="Appointy Logo" style={{ height: "30px" }} />
             </Link>
-          </li> */}
-          <li>
+          </li>
+          {/* <li>
             <Link to="/" style={{ textDecoration: "none", color: "#3ec8d8", marginRight: "20px" }} className="navbar-link">
               Appointy
             </Link>
-          </li>
+          </li> */}
           <li>
             <Link to="/home" style={{ textDecoration: "none", color: "#fff", marginRight: "20px", transition: "box-shadow 0.3s, border-radius 0.3s", borderRadius: "20px", padding: "10px" }} className="navbar-link" 
             onMouseEnter={(e) => e.target.style.boxShadow = '0 2px 4px rgba(94, 203, 233, 0.2)'}
