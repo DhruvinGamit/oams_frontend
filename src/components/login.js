@@ -38,7 +38,7 @@ const Login = () => {
         localStorage.setItem('LoginToken', data.token);
         localStorage.setItem('UserId', data.userId);
         localStorage.setItem('IsProvider', data.isProvider);
-        localStorage.setItem('UserEmail', email); // Store the user's email in local storage
+        localStorage.setItem('UserEmail', email); 
         setFormData({ email: '', password: '' });
         navigate('/home');
         window.location.reload();

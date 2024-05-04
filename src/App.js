@@ -9,14 +9,11 @@ import ServiceDetails from './components/serviceDetails';
 import AddServices from './components/AddServices';
 import AddCategories from './components/AddCategories';
 import CatagoryServices from './components/CatagoryServices';
-
 import Introduction from './components/introduction';
 import AppointmentForm from './components/AppointmentForm';
 import RequestedServices from './components/RequestedServices';
 import ServiceAppointments from './components/ServiceAppointments';
 import ServiceUpdate from './components/ServiceUpdate';
-
-
 
 function App() {
   return (
