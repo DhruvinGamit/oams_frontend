@@ -508,7 +508,7 @@ const Home = ({}) => {
             filteredServices.slice(-5).map((service) => (
               <div key={service._id} className="service-item">
                 <img
-                  src={`http://localhost:8080/serviceImages/${service.file.filename}`}
+                  src={require(`../serviceImages/${service.image}`)}
                   alt="Service"
                   className="service-image"
                   style={{
@@ -520,9 +520,6 @@ const Home = ({}) => {
 
                 <br />
                 <h4 className="service-title">{service.title}</h4>
-                <h4 className="service-title">
-                  {"../serviceImages/" + service.file.filename}
-                </h4>
 
                 <br />
                 <p className="service-description">

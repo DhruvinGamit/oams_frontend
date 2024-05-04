@@ -30,9 +30,12 @@ const Category = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/home/services/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/home/services/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         setServices(services.filter((service) => service._id !== id));
       } else {
@@ -44,10 +47,12 @@ const Category = () => {
   };
 
   return (
-    <div style={{ 
-      background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
-      minHeight: "100vh",
-      }}>
+    <div
+      style={{
+        background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
+        minHeight: "100vh",
+      }}
+    >
       <div className="category-container">
         <h2 className="category-title">{category.title}</h2>
         <br />
@@ -58,16 +63,24 @@ const Category = () => {
             services.map((service) => (
               <div key={service._id} className="service-item">
                 <img
-                  src={service.image}
+                  src={require(`../serviceImages/${service.image}`)}
                   alt="Service"
                   className="service-image"
-                  style={{ width: "200px", height: "150px", objectFit: "cover" }}
+                  style={{
+                    width: "200px",
+                    height: "150px",
+                    objectFit: "cover",
+                  }}
                 />
+
                 <br />
                 <h4 className="service-title">{service.title}</h4>
                 <br />
                 <p className="service-description">
-                  Description: {service.description.length > 110 ? `${service.description.slice(0, 110)}...` : service.description}
+                  Description:{" "}
+                  {service.description.length > 110
+                    ? `${service.description.slice(0, 110)}...`
+                    : service.description}
                 </p>
                 <p className="service-charges">Charges: {service.charges}</p>
                 <p className="service-duration">Duration: {service.duration}</p>
@@ -78,10 +91,23 @@ const Category = () => {
                   </Link>
                   {window.localStorage.getItem("UserId") === service.userId && (
                     <>
-                      <button className="delete-button" onClick={() => handleDelete(service._id)}>Delete</button>
-                      <Link className="update-button" to={`/services/edit/${service._id}`} >
+                      <Link
+                        className="edit-button"
+                        to={`/services/edit/${service._id}`}
+                      >
                         Update
                       </Link>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDelete(service._id)}
+                        style={{
+                          width: "75px",
+                          height: "38px",
+                          objectFit: "cover",
+                        }}
+                      >
+                        Delete
+                      </button>
                     </>
                   )}
                 </div>
