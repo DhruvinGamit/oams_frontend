@@ -322,7 +322,9 @@ const ServiceAppointments = () => {
 
 
   return (
-    <div className="container">
+    <div className="container"
+     
+    >
       <h2>Service Appointments</h2>
       {appointments.length === 0 ? (
         <p>No appointment requests found for your services.</p>
