@@ -105,7 +105,7 @@ const RequestedServices = () => {
                   <span className="appointment-status">
                     Status: {appointment.status}
                   </span>
-                  {appointment.status === "Pending" && new Date(appointment.date) > new Date() && (
+                  {appointment.status === "Pending" || appointment.status === "accepted" && new Date(appointment.date) > new Date() && (
                     <button
                       className="cancel-button"
                       onClick={() => handleDeleteAppointment(appointment._id)}
