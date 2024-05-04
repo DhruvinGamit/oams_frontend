@@ -88,7 +88,7 @@ const ServiceUpdate = () => {
           <input type="number" name="duration" value={service.duration} onChange={handleChange} />
         </div>
         <div className="form-group">
-          <label>Image URL:</label>
+          <label>Image Name:</label>
           <input type="text" name="image" value={service.image} onChange={handleChange} />
         </div>
         <div className="address-group">

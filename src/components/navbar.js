@@ -22,7 +22,7 @@ const Navbar = () => {
         <ul style={{ listStyleType: "none", display: "flex", alignItems: "center" }} className="navbar-links">
           <li>
             <Link to="/" style={{ marginRight: "20px" }} className="navbar-link">
-              <img src="https://info.cegedim-healthcare.co.uk/hubfs/CHS_Appointments%20logo.png" alt="Appointy Logo" style={{ height: "30px" }} />
+              <img src="https://theruntime.com/wp-content/uploads/2021/02/appointy.png" alt="Appointy Logo" style={{ height: "35px" }} />
             </Link>
           </li>
           {/* <li>

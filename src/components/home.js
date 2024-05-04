@@ -395,6 +395,7 @@ const Home = ({}) => {
       style={{
         background: "linear-gradient(to right, #A9f1df, #FFBBBB)",
         minHeight: "100vh",
+        paddingLeft: "20px", paddingRight: "20px" 
       }}
     >
       <div className="home-container">
@@ -505,7 +506,7 @@ const Home = ({}) => {
         <br></br>
         <div className="services-grid">
           {filteredServices.length > 0 ? (
-            filteredServices.slice(-5).map((service) => (
+            filteredServices.map((service) => (
               <div key={service._id} className="service-item">
                 <img
                   src={require(`../serviceImages/${service.image}`)}

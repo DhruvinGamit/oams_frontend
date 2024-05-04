@@ -105,13 +105,15 @@ const RequestedServices = () => {
                   <span className="appointment-status">
                     Status: {appointment.status}
                   </span>
-                  <button
-                    className="cancel-button"
-                    onClick={() => handleDeleteAppointment(appointment._id)}
-                    style={{ marginLeft: "10px" }}
-                  >
-                    Cancel
-                  </button>
+                  {appointment.status === "Pending" && new Date(appointment.date) > new Date() && (
+                    <button
+                      className="cancel-button"
+                      onClick={() => handleDeleteAppointment(appointment._id)}
+                      style={{ marginLeft: "10px" }}
+                    >
+                      Cancel
+                    </button>
+                  )}
                 </div>
               </li>
             ))}
