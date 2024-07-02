@@ -24,7 +24,7 @@ const Introduction = () => {
           className="section-image"
         />
         <p>
-          At Appointment Management System, we understand the importance of
+          At Appointy, we understand the importance of
           efficient and hassle-free appointment scheduling. Our platform is
           designed to streamline the entire appointment process, making it easy
           for both businesses and clients.
