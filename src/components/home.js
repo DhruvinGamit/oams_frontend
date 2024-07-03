@@ -12,7 +12,7 @@ const Home = ({}) => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/home/categories"
+          "https://oams-backend.vercel.app/api/home/categories"
         );
         if (response.ok) {
           const data = await response.json();
@@ -31,7 +31,7 @@ const Home = ({}) => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/home/services");
+        const response = await fetch("https://oams-backend.vercel.app/api/home/services");
         if (response.ok) {
           const data = await response.json();
           setServices(data.services);
@@ -49,7 +49,7 @@ const Home = ({}) => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/home/services/${id}`,
+        `https://oams-backend.vercel.app/api/home/services/${id}`,
         {
           method: "DELETE",
         }

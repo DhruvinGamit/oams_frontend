@@ -34,7 +34,7 @@ const AppointmentForm = () => {
 
     // Check if an appointment already exists for the selected date and time
     const existingAppointmentResponse = await fetch(
-      `http://localhost:8080/api/appointments/checkAvailability?serviceId=${id}&date=${moment(
+      `https://oams-backend.vercel.app/api/appointments/checkAvailability?serviceId=${id}&date=${moment(
         selectedDateTime
       )
         .tz("Asia/Kolkata")
@@ -65,7 +65,7 @@ const AppointmentForm = () => {
 
     // Proceed with payment and appointment submission
     try {
-      const response = await fetch("http://localhost:8080/api/payment", {
+      const response = await fetch("https://oams-backend.vercel.app/api/payment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ const AppointmentForm = () => {
         .format("HH:mm");
 
       // If no existing appointment, submit the new appointment
-      const response = await fetch("http://localhost:8080/api/appointments", {
+      const response = await fetch("https://oams-backend.vercel.app/api/appointments", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ const AppointmentForm = () => {
             AppointmentData,
           };
           const apiResponse = await fetch(
-            "http://localhost:8080/api/payment/verify",
+            "https://oams-backend.vercel.app/api/payment/verify",
             {
               method: "POST",
               headers: {

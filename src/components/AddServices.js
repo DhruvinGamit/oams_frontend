@@ -26,7 +26,7 @@
 //     const fetchCategories = async () => {
 //       try {
 //         const response = await fetch(
-//           "http://localhost:8080/api/home/categories"
+//           "https://oams-backend.vercel.app/api/home/categories"
 //         );
 //         if (response.ok) {
 //           const data = await response.json();
@@ -96,7 +96,7 @@
 
 //   //   try {
 //   //     const response = await fetch(
-//   //       "http://localhost:8080/api/users/addServices",
+//   //       "https://oams-backend.vercel.app/api/users/addServices",
 //   //       {
 //   //         method: "POST",
 //   //         headers: {
@@ -152,7 +152,7 @@
 //     formData.append('file', serviceData.file);
   
 //     try {
-//       const response = await fetch('http://localhost:8080/api/users/addServices', {
+//       const response = await fetch('https://oams-backend.vercel.app/api/users/addServices', {
 //         method: 'POST',
 //         body: formData,
 //       });
@@ -332,7 +332,7 @@ const AddServices = () => {
     const fetchCategories = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/home/categories"
+          "https://oams-backend.vercel.app/api/home/categories"
         );
         if (response.ok) {
           const data = await response.json();
@@ -394,7 +394,7 @@ const AddServices = () => {
     formData.append('file', serviceData.file);
   
     try {
-      const response = await fetch('http://localhost:8080/api/users/addServices', {
+      const response = await fetch('https://oams-backend.vercel.app/api/users/addServices', {
         method: 'POST',
         body: formData,
       });

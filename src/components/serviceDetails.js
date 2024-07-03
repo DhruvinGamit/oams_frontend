@@ -11,7 +11,7 @@ const ServiceDetails = () => {
   useEffect(() => {
     const fetchServiceDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/home/services/${id}`);
+        const response = await fetch(`https://oams-backend.vercel.app/api/home/services/${id}`);
         if (response.ok) {
           const data = await response.json();
           setService(data.service);

@@ -19,7 +19,7 @@ const AddCategories = () => {
     setSuccessMessage('');
     
     try {
-      const response = await fetch('http://localhost:8080/api/category/add', {
+      const response = await fetch('https://oams-backend.vercel.app/api/category/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

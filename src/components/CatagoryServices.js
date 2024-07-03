@@ -10,7 +10,7 @@ const Category = () => {
     const fetchCategory = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/home/category/${categoryId}`
+          `https://oams-backend.vercel.app/api/home/category/${categoryId}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -31,7 +31,7 @@ const Category = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/home/services/${id}`,
+        `https://oams-backend.vercel.app/api/home/services/${id}`,
         {
           method: "DELETE",
         }

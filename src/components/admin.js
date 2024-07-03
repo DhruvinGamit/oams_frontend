@@ -9,7 +9,7 @@
 //   useEffect(() => {
 //     const fetchUsers = async () => {
 //       try {
-//         const response = await fetch('http://localhost:8080/api/users');
+//         const response = await fetch('https://oams-backend.vercel.app/api/users');
 //         if (response.ok) {
 //           const data = await response.json();
 //           setUsers(data.users);
@@ -30,7 +30,7 @@
 
 //   const deleteProvider = async (email) => {
 //     try {
-//       const response = await fetch(`http://localhost:8080/api/users/deleteProvider/${email}`, {
+//       const response = await fetch(`https://oams-backend.vercel.app/api/users/deleteProvider/${email}`, {
 //         method: 'DELETE',
 //       });
 
@@ -123,7 +123,7 @@ const Admin = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/users');
+        const response = await fetch('https://oams-backend.vercel.app/api/users');
         if (response.ok) {
           const data = await response.json();
           setUsers(data.users);
@@ -145,7 +145,7 @@ const Admin = () => {
 
   const deleteUser = async (email) => {
     try {
-      const response = await fetch(`http://localhost:8080/api/users/deleteProvider/${email}`, {
+      const response = await fetch(`https://oams-backend.vercel.app/api/users/deleteProvider/${email}`, {
         method: 'DELETE',
       });
 

@@ -9,7 +9,7 @@ const ServiceAppointments = () => {
     const fetchAppointments = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/appointments/ServiceAppointments?userId=${userId}`,
+          `https://oams-backend.vercel.app/api/appointments/ServiceAppointments?userId=${userId}`,
           {
             method: "GET",
             headers: {
@@ -37,7 +37,7 @@ const ServiceAppointments = () => {
   const handleAcceptReject = async (appointmentId, status) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/appointments/${appointmentId}`,
+        `https://oams-backend.vercel.app/api/appointments/${appointmentId}`,
         {
           method: "PATCH",
           headers: {
@@ -75,7 +75,7 @@ const ServiceAppointments = () => {
   const handleRefund = async (appointmentId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/payment/${appointmentId}/refund`,
+        `https://oams-backend.vercel.app/api/payment/${appointmentId}/refund`,
         {
           method: "POST",
           headers: {
@@ -105,7 +105,7 @@ const ServiceAppointments = () => {
   const notifyServer = async (appointmentId, status) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/appointments/notify`,
+        `https://oams-backend.vercel.app/api/appointments/notify`,
         {
           method: "POST",
           headers: {

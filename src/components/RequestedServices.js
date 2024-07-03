@@ -13,7 +13,7 @@ const RequestedServices = () => {
     const fetchAppointments = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/appointments/RequestedServices?userId=${userId}`,
+          `https://oams-backend.vercel.app/api/appointments/RequestedServices?userId=${userId}`,
           {
             method: "GET",
             headers: {
@@ -41,7 +41,7 @@ const RequestedServices = () => {
   const handleDeleteAppointment = async (appointmentId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/appointments/${appointmentId}`,
+        `https://oams-backend.vercel.app/api/appointments/${appointmentId}`,
         {
           method: "DELETE",
           headers: {
