@@ -247,7 +247,7 @@ const Home = ({}) => {
               </div>
             ))
           ) : (
-            <p>No services match the search criteria.</p>
+            <p>No services available.</p>
           )}
         </div>
       </div>
